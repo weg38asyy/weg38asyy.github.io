@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>考拉茶棧</title>
+  <icon>https://fly-koala.com/icon.png</icon>
+  <subtitle>客倌，今天想喝什麼呢？</subtitle>
+  <link href="https://fly-koala.com/atom.xml" rel="self"/>
+  
+  <link href="https://fly-koala.com/"/>
+  <updated>2022-03-19T03:40:02.042Z</updated>
+  <id>https://fly-koala.com/</id>
+  
+  <author>
+    <name>飛考拉</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>大檔案上傳時斷線怎麼辦？斷點續傳快速實戰！【五分鐘開箱即用】</title>
+    <link href="https://fly-koala.com/posts/3bd9f9a3/"/>
+    <id>https://fly-koala.com/posts/3bd9f9a3/</id>
+    <published>2022-03-16T18:20:42.000Z</published>
+    <updated>2022-03-19T03:40:02.042Z</updated>
+    
+    
+    <summary type="html">大檔案上傳時，一旦遇到網路不穩或斷線，就會導致檔案需要全部重新上傳，本文講解斷點續傳如何實作。</summary>
+    
+    
+    
+    <category term="5分鐘開箱即用" scheme="https://fly-koala.com/categories/5%E5%88%86%E9%90%98%E9%96%8B%E7%AE%B1%E5%8D%B3%E7%94%A8/"/>
+    
+    
+    <category term="Laravel" scheme="https://fly-koala.com/tags/Laravel/"/>
+    
+    <category term="Vue" scheme="https://fly-koala.com/tags/Vue/"/>
+    
+    <category term="上傳" scheme="https://fly-koala.com/tags/%E4%B8%8A%E5%82%B3/"/>
+    
+  </entry>
+  
+</feed>

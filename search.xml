@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>大檔案上傳時斷線怎麼辦？斷點續傳快速實戰！【五分鐘開箱即用】</title>
+      <link href="/posts/3bd9f9a3/"/>
+      <url>/posts/3bd9f9a3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="項目說明："><a href="#項目說明：" class="headerlink" title="項目說明："></a>項目說明：</h2><p>大檔案上傳時，<strong>一旦遇到網路不穩或斷線，就會導致檔案需要全部重新上傳</strong>，本次開箱便實踐解決這個問題的技術邏輯。</p><h2 id="開箱需知："><a href="#開箱需知：" class="headerlink" title="開箱需知："></a>開箱需知：</h2><div class="note info disabled"><p>需要會使用Npm &amp; Composer等工具。</p></div><p>前端：</p><ul><li>Vue3 </li><li>Vite </li><li>Spark-md5 </li><li>Element-plus </li><li>Axios </li></ul><p>後端：</p><ul><li>Laravel8</li></ul><p><br/></p><h2 id="成果預覽"><a href="#成果預覽" class="headerlink" title="成果預覽"></a>成果預覽</h2><ol><li><p>大檔案分割及斷點上傳<br><img src="https://i.imgur.com/LhgO5kG.gif" alt=""></p></li><li><p>後端接收檔案及合併<br><img src="https://i.imgur.com/jAM8QwV.gif" alt=""></p></li></ol><hr><h3 id="完成清單"><a href="#完成清單" class="headerlink" title="完成清單"></a>完成清單</h3><div class='checkbox cyan checked'><input type="checkbox" checked="checked"/>            <p>文件名稱Hash計算</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>大檔切片上傳</p>            </div><div class='checkbox yellow checked'><input type="checkbox" checked="checked"/>            <p>大檔切片合併</p>            </div><div class='checkbox blue checked'><input type="checkbox" checked="checked"/>            <p>合併後切片刪除</p>            </div><hr><h2 id="項目連結"><a href="#項目連結" class="headerlink" title="項目連結"></a>項目連結</h2><div class="btn-left"><a class="btn-beautify blue larger" href="https://github.com/weg38asyy/vue3-laravel8-big-file-upload"   title="前往Github"><i class="fab fa-github"></i><span>前往Github</span></a></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 5分鐘開箱即用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Laravel </tag>
+            
+            <tag> Vue </tag>
+            
+            <tag> 上傳 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
