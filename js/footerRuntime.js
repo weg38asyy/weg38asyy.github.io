@@ -30,7 +30,7 @@ setInterval(() => {
   }
   if (Number(time[2]) < 22 && Number(time[2]) > 7) {
     currentTimeHtml =
-      "<img class='boardsign' src='https://img.shields.io/badge/考拉客棧-營業中-6adea8?style=social&logo=cakephp' title='客官～需要住宿嗎？'><div id='runtime'>" +
+      "<img class='boardsign' src='https://img.shields.io/badge/茶棧-營業中-6adea8?style=social&logo=cakephp' title='客官～需要住宿嗎？'><div id='runtime'>" +
       time[0] +
       " YEAR " +
       time[1] +
@@ -43,7 +43,7 @@ setInterval(() => {
       "</div>";
   } else {
     currentTimeHtml =
-      "<img class='boardsign' src='https://img.shields.io/badge/考拉客棧-休息了-6adea8?style=social&logo=coffeescript' title='洗洗睡！'><div id='runtime'>" +
+      "<img class='boardsign' src='https://img.shields.io/badge/茶棧-休息了-6adea8?style=social&logo=coffeescript' title='洗洗睡！'><div id='runtime'>" +
       time[0] +
       " YEAR " +
       time[1] +
