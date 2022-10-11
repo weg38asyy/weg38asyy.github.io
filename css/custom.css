@@ -98,3 +98,21 @@ i:hover{
 #nav .site-page:hover{
       cursor: url('/mouse/comix/Comix_White_Link.cur'),auto;
 }
+
+
+/* footer半透明 */
+/* #footer {
+  background: rgba(255, 255, 255, 0);
+  color: #000;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  backdrop-filter: saturate(100%) blur(2px)
+} */
+
+/* 鱼塘固定宽度 */
+/* canvas:not(#ribbon-canvas), #web_bg {
+  margin-bottom: -0.5rem;
+  display: block;
+  width: 100%;
+  height: 160px
+} */
