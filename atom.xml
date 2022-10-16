@@ -52,9 +52,9 @@
     <category term="最速攻略" scheme="https://fly-koala.com/categories/%E6%9C%80%E9%80%9F%E6%94%BB%E7%95%A5/"/>
     
     
-    <category term="Hexo" scheme="https://fly-koala.com/tags/Hexo/"/>
-    
     <category term="自動化" scheme="https://fly-koala.com/tags/%E8%87%AA%E5%8B%95%E5%8C%96/"/>
+    
+    <category term="Hexo" scheme="https://fly-koala.com/tags/Hexo/"/>
     
     <category term="CICD" scheme="https://fly-koala.com/tags/CICD/"/>
     
