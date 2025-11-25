@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+
+@font-face{
+    font-family:'ZhuZiAWan' ;  /* 字體名稱 */
+    src:url('/fonts/ZhuZiAWan-2.ttc'); /* 路徑 */
+    font-display : swap;
+}
+
+@font-face{
+    font-family:'Consolas' ;  /* 字體名稱 */
+    src:url('/fonts/Consolas.ttf'); /* 路徑 */
+    font-display : swap;
+}
+
+@font-face{
+    font-family:'setofont' ;  /* 字體名稱 */
+    src:url('/fonts/setofont.ttf'); /* 路徑 */
+    font-display : swap;
+}
+
+#site-title, #site-subtitle{
+    font-size: 30px;
+    font-family: 'setofont', cursive;
+}
+
+#page-header:before{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+
+
+/* 首页文章卡片 */
+/* #recent-posts > .recent-post-item{
+    background:rgba(255, 255, 255, 0.9);
+} */
+/* 首页侧栏卡片 */
+/* .card-widget{
+  background:rgba(255, 255, 255, 0.9)!important;
+} */
+/* 文章页面正文背景 */
+/* div#post{
+  background: rgba(255, 255, 255, 0.9);
+} */
+/* 分页页面 */
+/* div#page{
+  background: rgba(255, 255, 255, 0.9);
+} */
+/* 归档页面 */
+/* div#archive{
+  background: rgba(255, 255, 255, 0.9);
+} */
+/* 标签页面 */
+/* div#tag{
+  background: rgba(255, 255, 255, 0.9);
+} */
+/* 分类页面 */
+/* div#category{
+  background: rgba(255, 255, 255, 0.9);
+}  */
+
+/* 全局默认鼠标指针 */
+body,
+html{
+  cursor: url('/mouse/comix/Comix_White_Pointer.cur'),auto !important;
+}
+/* 悬停图片时的鼠标指针 */
+img{
+  cursor: url('/mouse/comix/Comix_White_Link.cur'),auto !important;
+}
+/* 选择链接标签时的鼠标指针 */
+a:hover{
+    cursor: url('/mouse/comix/Comix_White_Link.cur'),auto;
+}
+/* 选中输入框时的鼠标指针 */
+input:hover{
+    cursor: url('/mouse/comix/Comix_White_Hand.cur'),auto;
+}
+/* 悬停按钮时的鼠标指针 */
+button:hover{
+    cursor: url('/mouse/comix/Comix_White_Link.cur'),auto;
+}
+/* 悬停列表标签时的鼠标指针 */
+i:hover{
+    cursor: url('/mouse/comix/Comix_White_Pointer.cur'),auto;
+}
+/* 悬停页脚链接标签（例如页脚徽标）时的鼠标指针 */
+#footer-wrap a:hover{
+      cursor: url('/mouse/comix/Comix_White_Link.cur'),auto;
+}
+/* 悬停页码时的鼠标指针 */
+#pagination .page-number:hover{
+      cursor: url('/mouse/comix/Comix_White_Link.cur'),auto;
+}
+/* 悬停菜单栏时的鼠标指针 */
+#nav .site-page:hover{
+      cursor: url('/mouse/comix/Comix_White_Link.cur'),auto;
+}
+
+
+/* footer半透明 */
+#footer {
+  text-align: center;
+  background: rgba(255, 255, 255, 0);
+  color: #000;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  backdrop-filter: saturate(100%) blur(2px)
+}
+
+/* 確保版權聲明文字為黑色 */
+.copyright {
+  color: #000 !important;
+}
+
+/* 鱼塘固定宽度 */
+/* canvas:not(#ribbon-canvas), #web_bg {
+  margin-bottom: -0.5rem;
+  display: block;
+  width: 100%;
+  height: 160px
+} */
