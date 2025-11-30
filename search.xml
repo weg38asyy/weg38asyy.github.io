@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>提升網站排名必備神器：SEO Top 10</title>
+      <link href="/posts/f744987/"/>
+      <url>/posts/f744987/</url>
+      
+        <content type="html"><![CDATA[<h2 id="項目說明">項目說明</h2><div class="note info modern"><p>SEO（Search Engine Optimization）是提升網站在搜尋引擎排名的關鍵技術。然而，網路上充斥著各種 SEO 技巧，有些是 Google 官方認可的，有些則是業界經驗談或臆測。</p></div><span class='p red center logo h4'>本文整理了 SEO Top 10 常用標籤與技巧，並標註出處來源，讓你一眼分辨哪些是官方建議、哪些是業界共識！</span><p>本篇文章特別為<strong>行銷團隊</strong>與<strong>網站管理者</strong>設計，篩選出 Google 官方認證最重要的 10 個 SEO 核心標籤，並附上互動式模擬器，讓你直接預覽修改效果，無需寫程式也能懂 SEO！</p><hr><h2 id="開箱須知">開箱須知</h2><ul><li><strong>適用對象</strong>：行銷人員、社群小編、網站管理員 (無需程式背景)。</li><li><strong>學習目標</strong>：掌握影響 Google 排名的 10 大關鍵技術指標。</li><li><strong>使用方式</strong>：透過下方互動工具，體驗標籤對搜尋結果 (SERP) 與社群分享的影響。</li></ul><br/><h2 id="成果預覽：SEO-Top-10-互動式工具">成果預覽：SEO Top 10 互動式工具</h2><iframe src="/demo/seo/seo-top10.html"         style="width: 100%; height: 800px; border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"         scrolling="yes">  您的瀏覽器不支援 iframe，請<a href="/demo/seo/seo-top10.html" target="_blank">點此直接開啟</a></iframe><div class="note success modern"><p>💡 <strong>使用提示</strong>：可以直接在上方互動式工具中切換不同的 SEO 標籤類別，即時查看說明與程式碼範例！</p></div><hr><h3 id="完成清單">完成清單</h3><div class='checkbox cyan checked'><input type="checkbox" checked="checked"/>            <p>完成各類型 SEO Top 10 的說明</p>            </div><hr><h2 id="項目連結">項目連結</h2><div class="btn-left"><a class="btn-beautify blue larger" href="/demo/seo/seo-top10.html" title="另開連結瀏覽"><i class="fas fa-play-circle"></i><span>另開連結瀏覽</span></a></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 5分鐘開箱即用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SEO </tag>
+            
+            <tag> 網站優化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>AI：SDD下的利器 Spec Kit 真的好用嗎？</title>
+      <link href="/posts/a1b2c3d4/"/>
+      <url>/posts/a1b2c3d4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2><div class="note info modern"><p>Spec Kit 是 SDD（Specification-Driven Development）理念下誕生的工具。2020 年後，隨著 AI 浪潮逐漸襲來，SDD 開始受到關注；尤其在 2025 年，LLM 的快速迭代讓社群有了大量討論，探討 AI 輔助開發的可能性，Spec Kit 便應運而生。</p></div><span class='p red center logo h4'>本文將帶你快速了解 Spec Kit，並分享我的實際使用心得！</span><hr><h2 id="Spec-Kit-快速體驗">Spec Kit 快速體驗</h2><div class="note success modern"><p>10 秒內讓你快速理解社區火紅的 Spec Kit 究竟有什麼魔力！</p></div><p><a class="btn-beautify block center larger outline blue" href="/demo/spec_kit_demo.html" target="_blank" rel="noopener noreferrer" title="點我體驗互動演示"><i class="fas fa-play-circle"></i><span>點我體驗互動演示</span></a></p><hr><h2 id="軟體開發方法論比較（可選閱讀）">軟體開發方法論比較（可選閱讀）</h2><div class="note blue modern"><p>在認識 Spec Kit 之前，先來了解各種軟體開發方法論的差異，這有助於理解 SDD 的定位。</p></div><div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">傳統開發</button><button type="button" class="tab">TDD</button><button type="button" class="tab">ATDD</button><button type="button" class="tab">BDD</button><button type="button" class="tab">小結</button></div><div class="tab-contents"><div class="tab-item-content active"><h3 id="傳統開發（中小企業主流）">傳統開發（中小企業主流）</h3><p><strong>情境：</strong> 客戶說：「我想要一個會員登入功能。」</p><p><strong>流程：</strong></p><ol><li><strong>拿到需求：</strong> 工程師開始想像登入畫面長什麼樣子</li><li><strong>直接寫程式：</strong> 馬上開始寫程式碼</li><li><strong>測試：</strong> 寫完後，手動點擊畫面試試看。「看起來可以登入！」</li><li><strong>交付與修改：</strong> 客戶或 QA 發現問題：「密碼錯誤三次應該要鎖帳號，你沒做！」工程師只好回去修改，但可能不小心改壞了其他功能</li></ol><br/><p><strong>核心問題：</strong></p><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>專案規模擴大時，可能改1錯10</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>客戶需求往往模糊，規格一旦做錯可能全部打掉重來</p>            </div><br/><div class="note warning modern"><p>備註：所以一般 PM 或 UIUX 團隊都會先提供 Prototype 給客戶確認，但就算如此，仍可能在開發完成後發現不符合需求。</p></div></div><div class="tab-item-content"><h3 id="TDD（Test-Driven-Development）">TDD（Test-Driven Development）</h3><p><span class='p green center'>為了解決傳統開發的核心問題：改1錯10（確保事情要做「正確」！）</span></p><p><strong>情境：</strong> 客戶說：「我想要一個會員登入功能。」</p><p><strong>流程：</strong></p><table><thead><tr><th>階段</th><th>說明</th></tr></thead><tbody><tr><td>🔴 紅燈</td><td>為接下來要開發的功能撰寫測試用例，這些測試一定會失敗（因為程式還未開發）</td></tr><tr><td>🟢 綠燈</td><td>撰寫程式碼，讓測試用例通過</td></tr><tr><td>🔄 重構</td><td>優化撰寫的程式碼</td></tr></tbody></table><p><strong>核心問題：</strong></p><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>學習曲線高</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>開發時間增加（這也是大多企業不做的原因）</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>只保證程式的品質（做正確），但不保證程式的方向（是否做對用戶需求）</p>            </div><br/><div class="note info modern"><p>商業市場上，先推出產品往往比產品品質更重要。例如 ChatGPT 推出就造成轟動，直到 2025 年市佔率依舊占了一大塊。</p></div></div><div class="tab-item-content"><h3 id="ATDD（Acceptance-Test-Driven-Development）">ATDD（Acceptance Test-Driven Development）</h3><p><span class='p green center'>為了解決傳統開發核心問題：釐清客戶的模糊需求，確保「做對方向」！</span></p><p><strong>情境：</strong> 客戶說：「我想要一個會員登入功能。」</p><p><strong>流程：</strong></p><ol><li><strong>團隊討論：</strong> PM、RD、QA、SA、客戶（視情況）一起坐下來討論需求</li><li><strong>定義驗收標準：</strong> 確保要做到什麼程度才算合格交付</li><li><strong>開發功能：</strong> 根據驗收標準進行開發（可能採傳統開發或 TDD）</li><li><strong>驗收交付：</strong> PM 或客戶根據驗收清單進行驗收，直到通過</li></ol><p><strong>核心問題：</strong></p><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>溝通成本較高（技術人員與非技術人員的溝通）</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>考驗團隊文化</p>            </div></div><div class="tab-item-content"><h3 id="BDD（Behavior-Driven-Development）">BDD（Behavior-Driven Development）</h3><p><span class='p green center'>為了解決 ATDD 的問題：溝通成本高</span></p><p><strong>情境：</strong> 客戶說：「我想要一個會員登入功能。」</p><p><strong>流程：</strong></p><ol><li><strong>團隊討論：</strong> 同ATDD，團隊成員一同討論，但使用「Given-When-Then」工具，作為技術與非技術人員的溝通橋樑來撰寫規格</li><li><strong>定義驗收標準：</strong> 確保要做到什麼程度才算合格交付</li><li><strong>開發功能：</strong> RD 根據規格開發功能</li><li><strong>自動化測試：</strong> 「Given-When-Then」規格文件可轉為自動化測試，確保品質</li></ol><p><strong>核心問題：</strong></p><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>學習成本高</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>考驗團隊文化</p>            </div></div><div class="tab-item-content"><h3 id="開發方法論小結">開發方法論小結</h3><div class="note success modern"><p>每一種軟體開發模式都有其利弊，大多時候會採用 <strong>Hybrid（混合）</strong> 方式：</p></div><table><thead><tr><th>場景</th><th>常見做法</th></tr></thead><tbody><tr><td>政府專案</td><td>會有驗收標準才撥款（ATDD 精神）</td></tr><tr><td>快速迭代產品</td><td>定義 User Story 確認方向</td></tr><tr><td>大型維運系統</td><td>Tech Leader 更在乎「做正確」，確保系統年穩定運行率 &gt; 95%</td></tr></tbody></table></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div><hr><h2 id="Spec-Kit-操作說明懶人包">Spec Kit 操作說明懶人包</h2><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/AISpec-kit%20Flow.jpg" alt="Spec Kit 流程圖"></p><hr><h2 id="實際使用心得">實際使用心得</h2><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/AISDD_demo.png" alt="SDD Demo"></p><p>使用 SDD 後，總結了我 2025 年底使用 Spec Kit 的看法：</p><h3 id="缺點">缺點</h3><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>非常燒 Tokens，Claude Pro 的週額度約 2 天就用完了（我的籃球專案進度都還沒 1/10）</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>走 Spec Kit 流程到 /tasks 階段時，若發現漏加規格，整個流程需重跑，Tokens 再見</p>            </div><h3 id="優點">優點</h3><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>Spec 部分確實寫得很詳細，能將模糊的流程更具體化</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>產出的最終成品品質更好（畢竟燒了那麼多 Tokens）</p>            </div><h3 id="建議">建議</h3><div class="note warning modern"><p>為了解決燒 Tokens 的問題，目前社區討論中，我個人贊同 <strong>Hybrid 派</strong> 的做法：</p></div><div class="timeline "><div class='timeline-item headline'>        <div class='timeline-item-title'>          <div class='item-circle'><p>建議流程</p></div>        </div>      </div><div class='timeline-item'>        <div class='timeline-item-title'>          <div class='item-circle'><p>只用 Spec Kit 產生規格文件</p></div>        </div>        <div class='timeline-item-content'><p>讓 Spec Kit 專注在它最擅長的事：將模糊需求轉為詳細規格（eg：例如使用 Gemini CLI 來生成規格，前提是自己要先把需求寫過一版）</p></div>      </div><div class='timeline-item'>        <div class='timeline-item-title'>          <div class='item-circle'><p>使用 AI工具 進行開發</p></div>        </div>        <div class='timeline-item-content'><p>使用 AI 工具，例如 Cursor、Claude CLI 等，手動去增加 Spec 來生成程式碼</p></div>      </div><div class='timeline-item'>        <div class='timeline-item-title'>          <div class='item-circle'><p>AI工具自動更新規格文件</p></div>        </div>        <div class='timeline-item-content'><p>開發完成後，請AI工具自動將規格更新到需求文件上，一旦要進行需求調整或者擴充時，可以讓 LLM 更快擁有必備的知識</p></div>      </div></div><div class="note success modern"><p>這種方式的最終成品表現上，品質也是相當不錯的，這也是我目前比較推崇的方式！<br>（後續如果有更好的做法，屆時再來更新）</p></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> AI </tag>
+            
+            <tag> SDD </tag>
+            
+            <tag> Spec Kit </tag>
+            
+            <tag> 開發工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>學習的體系與架構一圖流</title>
+      <link href="/posts/8a9cdeef/"/>
+      <url>/posts/8a9cdeef/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言：為什麼你需要一套「學習的體系」？">前言：為什麼你需要一套「學習的體系」？</h2><div class="note blue modern"><p>在資訊爆炸的時代，我們每天都在接觸新知，但你是否曾感到困惑：</p><ul><li>為什麼學了這麼多，卻總是記不住？</li><li>為什麼知識無法應用到實際生活中？</li><li>為什麼總是學得慢、忘得快？</li></ul></div><p>這篇文章是我整合了多門線上課程與經典書籍後，打造的一套「通用學習框架」：</p><details class="folding-tag" cyan><summary> 📚 參考資源清單 </summary>              <div class='content'>              <p><strong>線上課程</strong></p><ul><li>Coursera -「Learning How to Learn」</li></ul><p><strong>閱讀書籍</strong></p><ul><li>「超速學習」（後設學習的重要性）</li><li>「刻意練習」（強調有目的的練習）</li><li>「如何成為有效學習的高手」</li></ul>              </div>            </details><span class='p center logo large'>這套框架的核心目標只有一個</span><span class='p red center logo h3'>怎麼樣幫助自己學得更快、更好、更有效</span><hr><h2 id="核心理念：整合與輸出">核心理念：整合與輸出</h2><div class="note warning modern"><p>許多人學習只是單向的「輸入」，聽課、看書，然後就結束了。</p></div><div class="note success modern"><p>真正高效的學習，是將新知識與舊有的知識體系相「<strong>整合</strong>」，並透過「<strong>輸出</strong>」來加深理解。</p></div><h3 id="輸出的方式">輸出的方式</h3><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>寫筆記（整理知識架構）</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>分享給他人（費曼學習法）</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>實際應用（動手做項目）</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>教學相長（當老師教別人）</p>            </div><p>我將這些心得與方法，濃縮成一張視覺化的學習路徑圖，方便理解與記憶。</p><hr><h2 id="學習路徑圖-Learning-Path">學習路徑圖 (Learning Path)</h2><div class="note info modern"><p>這張圖涵蓋了從確立目標、理解原理，到動手實踐、獲取回饋的完整學習閉環。</p></div><div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">中文版</button><button type="button" class="tab">日文版</button><button type="button" class="tab">英文版</button></div><div class="tab-contents"><div class="tab-item-content active"><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Readings/Learning%20Path.jpg" alt=""></p></div><div class="tab-item-content"><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Readings/Learning%20Path%28JP%29.jpg" alt=""></p></div><div class="tab-item-content"><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Readings/Learning%20Path%28ENG%29.jpg" alt=""></p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div><hr><h2 id="總結：成為學習高手的關鍵">總結：成為學習高手的關鍵</h2><ol><li><strong>先學「如何學」 (Meta-learning)</strong>：在投入大量時間前，先花點時間了解該領域的學習方法與核心概念。</li><li><strong>專注於「刻意練習」</strong>：花一萬個小時，不如花一百個小時進行有目標、有回饋的專注練習。</li><li><strong>以「輸出」為導向</strong>：不要只當知識的海綿，要當知識的自來水。透過寫作、分享、實作，讓知識流動起來。</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 學習 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 學習 </tag>
+            
+            <tag> 學習技巧 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hexo最速CICD部署，GitHub Actions！</title>
+      <link href="/posts/9txgh5a2/"/>
+      <url>/posts/9txgh5a2/</url>
+      
+        <content type="html"><![CDATA[<h2 id="攻略目標">攻略目標</h2><div class="tabs"><div class="nav-tabs"><button type="button" class="tab active">說明</button><button type="button" class="tab">一鍵部署 vs CICD部署 優缺分析</button><button type="button" class="tab">CICD實戰流程架構圖</button></div><div class="tab-contents"><div class="tab-item-content active"><p>過往我們使用Hexo架站大多數都會使用<a href="https://hexo.io/zh-tw/docs/one-command-deployment">一鍵部署</a>方式進行。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">範例指令：</span><br><span class="line"></span><br><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">hexo clean </span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><p><span class='p red center logo h4'>本文將取代上述一鍵部署，並講解如何透過Github Actions來達成CICD的部署。</span></p></div><div class="tab-item-content"><p>一鍵部署（透過hexo-deployer-git）</p><ul><li>優點</li></ul><div class='checkbox checked'><input type="checkbox" checked="checked"/>            <p>簡單的指令</p>            </div><div class='checkbox checked'><input type="checkbox" checked="checked"/>            <p>快速上線</p>            </div><ul><li>缺點</li></ul><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>網站源碼需要手動備份</p>            </div><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>無法自動化細部操作</p>            </div><hr><p>CICD部署</p><ul><li>優點</li></ul><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>快速上線</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>備份及部署指令整合（更簡潔）</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>源碼備份</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>可客製化細部操作（如額外執行獨立程式等）</p>            </div><ul><li>缺點</li></ul><div class='checkbox times red checked'><input type="checkbox" checked="checked"/>            <p>需要額外學習成本</p>            </div></div><div class="tab-item-content"><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/Github%20Actions%20Flow.png" alt=""></p></div></div><div class="tab-to-top"><button type="button" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div><h2 id="攻略須知">攻略須知</h2><div class="note info modern"><p>必須要有部署過Hexo項目至Github的經驗，並且簡單瞭解Git指令，本篇攻略將較好上手！</p></div><ul><li>環境需具備以下：<ol><li>擁有<a href="https://hexo.io/zh-tw/">Hexo</a>項目，並部署在個人的Github上。</li><li>已安裝<a href="https://git-scm.com/">Git</a></li></ol></li></ul><br/><h3 id="hexo-d-與-使用-Github-Actions-差異">hexo d 與 使用 Github Actions 差異</h3><ul><li><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actionsflow.png" alt=""></li></ul><br/><h2 id="攻略步驟">攻略步驟</h2><h3 id="Github-Action-配置檔攻略">Github Action 配置檔攻略</h3><div class="note info no-icon flat"><p>本篇將教導紅色區塊部分的配置，詳細請看下圖</p></div><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/guide1.png" alt="配置檔流程圖"></p><h4 id="第一步">第一步</h4><p>在Github創建好兩個項目，一個是私人的（假設自己的Blog源碼並不打算公開），一個是公開讓大家瀏覽的頁面（Github pages）。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/01.png" alt=""></p><p>新增項目後，頁面如下圖（尚未上傳東西）<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/02.png" alt=""></p><h4 id="第二步">第二步</h4><p>在Private的項目中，點選上方的Actions。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/03.png" alt=""></p><h4 id="第三步">第三步</h4><p>點選 <strong>set up a workflow yourself</strong>，進行.yml檔的配置。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/04.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/05.png" alt=""></p><h4 id="第四步（2026-12-更新配置）">第四步（2026/12 更新配置）</h4><p>進行配置，以下提供個人的配置（信箱跟名字需要改成自己的）。</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置檔名稱</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line"><span class="comment"># 進行什麼行為時觸發，也可多行為觸發，例如[push, fork]</span></span><br><span class="line"><span class="attr">on:</span> [<span class="string">push</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">pages:</span></span><br><span class="line">    <span class="comment"># 環境提供作業系統，目前提供Windows, macOS, Ubuntu，詳細查閱（https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners）</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="comment"># 拉取當前Repository的分支main的Code到他們的容器（如配置檔中使用的Runs-on的Ubuntu）上</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">main</span></span><br><span class="line">          </span><br><span class="line">      <span class="comment"># 安裝Nodejs環境</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&#x27;20&#x27;</span></span><br><span class="line">          </span><br><span class="line">      <span class="comment"># 緩存</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Cache</span> <span class="string">NPM</span> <span class="string">Dependencies</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/cache@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">node_modules</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.OS</span> <span class="string">&#125;&#125;-npm-cache</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.OS &#125;&#125;-npm-cache</span></span><br><span class="line"><span class="string"></span>            </span><br><span class="line">      <span class="comment"># 增加SSH KEY的配置      </span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Add</span> <span class="string">SSH</span> <span class="string">Private</span> <span class="string">Key</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">SSH_PRIVATE:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_SSH_PRIVATE_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$SSH_PRIVATE&quot; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 700 -R ~/.ssh</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          git config --global user.email &quot;你的Github信箱&quot;</span></span><br><span class="line"><span class="string">          git config --global user.name &quot;你的Github密碼&quot;</span></span><br><span class="line"><span class="string"></span>      </span><br><span class="line">      <span class="comment"># 安裝Hexo需要的環境（針對Hexo根目錄的package.json）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string"></span>      </span><br><span class="line">      <span class="comment"># 一鍵化部署</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Hexo</span> <span class="string">Deploy</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo generate</span></span><br><span class="line"><span class="string">          hexo deploy</span></span><br></pre></td></tr></table></figure><h4 id="第五步">第五步</h4><p>配置好後進行提交（Push）。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/06.png" alt=""></p><p>下圖就代表配置完成了！（配置完成後，會發現Actions有運行了，不過現階段尚會報錯，還需要把SSH給配好才行）。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/07.png" alt=""></p><hr><h3 id="SSH-配置攻略">SSH 配置攻略</h3><div class="note info no-icon flat"><p>本篇將教導紅色區塊部分的配置，詳細請看下圖</p></div><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/guide2.png" alt=""></p><h4 id="第一步-2">第一步</h4><div class="note info disabled"><p>如果已經有再Github配置Global的ssh key，那麼這一步可以省略！</p></div><p>生成你的SSH KEY</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure><p>生成你的SSH KEY，並且指定鑰匙的名字</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email@example.com&quot;</span> -f ~/.ssh/鑰匙名字</span><br></pre></td></tr></table></figure><p>SSH的Key生成過程中會有一些詢問，一律按Enter下一步即可）<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/08.png" alt=""></p><p>最終生成一把haha的公鑰及私鑰<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/09.png" alt=""></p><h4 id="第二步-2">第二步</h4><p>進到你的私人項目中（放程式碼的地方），並且部署私鑰。</p><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/10.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/11.png" alt=""></p><p><strong>HEXO_SSH_PRIVATE_KEY</strong>這個名稱就是在yml配置的名稱，兩邊必須對應，否則會執行.yml程序時，會讀取不到鑰匙。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/12.png" alt=""></p><h4 id="第三步-2">第三步</h4><p>進到你的Github pages項目中，部署公鑰，配置方式同私鑰。<br><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/13.png" alt=""></p><p>部署完畢後，就可以來進行測試了！</p><h3 id="測試">測試</h3><p>在本地將程式碼Push到Github你的私人項目中，並且到Actions查看機器執行的狀態，若無意外，就大功告成啦！👋👋</p><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/14.png" alt=""></p><p><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actions/15.png" alt=""></p><h2 id="最終你將成為">最終你將成為</h2><ul><li><img src="https://cdn.jsdelivr.net/gh/weg38asyy/tec_img/Github%20Actionscomic_compare.png" alt=""></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 最速攻略 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 自動化 </tag>
+            
+            <tag> Hexo </tag>
+            
+            <tag> CICD </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>商業思維學院每日自動登入打卡！再也不用忘記簽到啦！</title>
+      <link href="/posts/b5dsga5t/"/>
+      <url>/posts/b5dsga5t/</url>
+      
+        <content type="html"><![CDATA[<h2 id="項目說明：">項目說明：</h2><p>總有那麼幾天特別忙碌，總有那麼幾天自己簽到記錄已經累積到一個亮眼的地步，但恰巧就斷了……為了避免這個遺憾，讓打卡簽到自動化，從此不用擔心與受怕！</p><h2 id="開箱須知：">開箱須知：</h2><ul><li>需要安裝<a href="https://www.python.org/downloads/">Python</a></li><li>透過Python安裝[Selenium]套件</li><li>需要安裝Chrome ＆ <a href="https://chromedriver.chromium.org/">ChromeDriver</a></li><li>這隻程式於Mac撰寫，Win請自行修改。</li></ul><br/><h2 id="成果預覽">成果預覽</h2><p><img src="https://dto3j6gurx7ch.cloudfront.net/2022/03/31/bizthinkingPreview.png" alt=""></p><hr><h3 id="完成清單">完成清單</h3><div class='checkbox cyan checked'><input type="checkbox" checked="checked"/>            <p>打卡簽到</p>            </div><h3 id="待辦清單">待辦清單</h3><div class='checkbox yellow'><input type="checkbox" />            <p>其它日常任務自動化？</p>            </div><hr><h2 id="項目連結">項目連結</h2><div class="btn-left"><a class="btn-beautify blue larger" href="https://github.com/weg38asyy/Bizthinking_SignIn" title="前往Github"><i class="fab fa-github"></i><span>前往Github</span></a></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 5分鐘開箱即用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 自動化 </tag>
+            
+            <tag> Python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>大檔案上傳時斷線怎麼辦？斷點續傳快速實戰！</title>
+      <link href="/posts/3bd9f9a3/"/>
+      <url>/posts/3bd9f9a3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="項目說明：">項目說明：</h2><p>大檔案上傳時，<strong>一旦遇到網路不穩或斷線，就會導致檔案需要全部重新上傳</strong>，本次開箱便實踐解決這個問題的技術邏輯。</p><h2 id="開箱須知：">開箱須知：</h2><div class="note info modern"><p>需要會使用Npm &amp; Composer等工具。</p></div><p>前端：</p><ul><li>Vue3</li><li>Vite</li><li>Spark-md5</li><li>Element-plus</li><li>Axios</li></ul><p>後端：</p><ul><li>Laravel8</li></ul><br/><h2 id="成果預覽">成果預覽</h2><ol><li><p>大檔案分割及斷點上傳<br><img src="https://i.imgur.com/LhgO5kG.gif" alt=""></p></li><li><p>後端接收檔案及合併<br><img src="https://i.imgur.com/jAM8QwV.gif" alt=""></p></li></ol><hr><h3 id="完成清單">完成清單</h3><div class='checkbox cyan checked'><input type="checkbox" checked="checked"/>            <p>文件名稱Hash計算</p>            </div><div class='checkbox green checked'><input type="checkbox" checked="checked"/>            <p>大檔切片上傳</p>            </div><div class='checkbox yellow checked'><input type="checkbox" checked="checked"/>            <p>大檔切片合併</p>            </div><div class='checkbox blue checked'><input type="checkbox" checked="checked"/>            <p>合併後切片刪除</p>            </div><hr><h2 id="項目連結">項目連結</h2><div class="btn-left"><a class="btn-beautify blue larger" href="https://github.com/weg38asyy/vue3-laravel8-big-file-upload" title="前往Github"><i class="fab fa-github"></i><span>前往Github</span></a></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 5分鐘開箱即用 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Laravel </tag>
+            
+            <tag> Vue </tag>
+            
+            <tag> 上傳 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

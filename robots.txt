@@ -1,0 +1,15 @@
+# robots.txt for https://fly-koala.com/
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private paths
+Disallow: /js/
+Disallow: /css/
+Disallow: /lib/
+Disallow: /fonts/
+
+# Sitemap
+Sitemap: https://fly-koala.com/sitemap.xml
+Sitemap: https://fly-koala.com/sitemap.txt
+Sitemap: https://fly-koala.com/baidusitemap.xml
