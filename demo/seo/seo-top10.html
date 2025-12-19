@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO 介紹 & 模擬器 | Modern UI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts (Inter & Noto Sans TC) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' },
+                        slate: { 850: '#1e293b' } // Custom dark slate
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(59, 130, 246, 0.3)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #F8FAFC;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 點狀背景圖案 */
+        .bg-dot-pattern {
+            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* 自定義捲軸 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #E2E8F0;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #CBD5E1;
+        }
+
+        /* 動畫 */
+        .juice-flow {
+            stroke-dasharray: 10;
+            animation: dash 1.5s linear infinite;
+        }
+
+        .juice-blocked {
+            stroke-dasharray: 10;
+            animation: none;
+            opacity: 0.3;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -20;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 玻璃擬態 */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+
+<body class="h-screen flex flex-col md:flex-row overflow-hidden text-slate-700 bg-dot-pattern">
+
+    <!-- Mobile Header -->
+    <header
+        class="md:hidden bg-white/90 backdrop-blur border-b border-slate-200 p-4 flex justify-between items-center z-30 sticky top-0">
+        <div class="flex items-center gap-2.5">
+            <div class="bg-gradient-to-br from-primary-600 to-primary-700 text-white p-1.5 rounded-lg shadow-glow">
+                <i class="ph-fill ph-compass text-lg"></i>
+            </div>
+            <h1 class="font-bold text-lg text-slate-800 tracking-tight">SEO 介紹</h1>
+        </div>
+        <button id="mobile-menu-btn" class="text-slate-500 hover:text-primary-600 p-1 transition-colors">
+            <i class="ph ph-list text-2xl"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar (Modern Clean Style) -->
+    <aside id="sidebar"
+        class="fixed inset-0 z-20 bg-white md:static md:w-72 md:border-r border-slate-200/60 flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 shadow-2xl md:shadow-none h-full">
+
+        <!-- Logo Area -->
+        <div class="p-6 pb-4 bg-white z-10">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="bg-gradient-to-br from-primary-600 to-indigo-600 text-white p-2 rounded-xl shadow-md">
+                        <i class="ph-fill ph-compass text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg text-slate-900 leading-tight">SEO 介紹</h1>
+                        <p class="text-[11px] font-semibold text-primary-600 tracking-wider uppercase">Interactive Guide
+                        </p>
+                    </div>
+                </div>
+                <!-- Mobile Close -->
+                <button id="sidebar-close" class="md:hidden text-slate-400 hover:text-slate-600">
+                    <i class="ph ph-x text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Search Placeholder -->
+            <div class="relative">
+                <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" placeholder="快速搜尋標籤..."
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg py-2 pl-9 pr-3 text-sm focus:ring-2 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all placeholder:text-slate-400 text-slate-600">
+            </div>
+        </div>
+
+        <!-- Navigation Tree -->
+        <div id="nav-tree" class="flex-1 overflow-y-auto custom-scrollbar px-4 pb-4 space-y-1">
+            <!-- Injected by JS -->
+        </div>
+
+        <!-- User Profile / Brand Link -->
+        <div class="p-4 border-t border-slate-100 mx-2 mb-2">
+            <a href="https://fly-koala.com" target="_blank"
+                class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors group">
+                <div
+                    class="w-9 h-9 rounded-full bg-gradient-to-tr from-slate-200 to-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs ring-2 ring-white shadow-sm group-hover:from-primary-100 group-hover:to-primary-50 group-hover:text-primary-600 transition-all">
+                    FK
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-slate-700 group-hover:text-primary-600 transition-colors">
+                        fly-koala.com</p>
+                    <p class="text-xs text-slate-400 group-hover:text-primary-400 transition-colors">飛考拉</p>
+                </div>
+                <i class="ph ph-arrow-square-out text-slate-300 group-hover:text-primary-400 transition-colors"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+
+        <!-- Sticky Header (Glassmorphism) -->
+        <div
+            class="sticky top-0 z-10 glass-panel border-b border-slate-200/60 px-6 py-4 md:px-10 md:py-5 flex justify-between items-start transition-all">
+            <div>
+                <div
+                    class="flex items-center gap-2 text-[11px] font-bold tracking-widest text-slate-400 mb-1.5 uppercase">
+                    <span id="header-category-name">CATEGORY</span>
+                    <i class="ph-bold ph-caret-right text-slate-300 text-[10px]"></i>
+                    <span class="text-primary-600">Rank #<span id="header-rank">1</span></span>
+                </div>
+                <h2 id="header-tag-name"
+                    class="text-3xl md:text-4xl font-extrabold text-slate-800 tracking-tight font-mono">&lt;tag&gt;</h2>
+            </div>
+
+            <div id="header-badge-container" class="hidden sm:block pt-1">
+                <!-- Badge injected by JS -->
+            </div>
+        </div>
+
+        <!-- Scrollable Canvas -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-8 md:px-10">
+            <div class="max-w-6xl mx-auto space-y-8 fade-in pb-12">
+
+                <!-- 1. Simulator Section (Browser/Device Frame Style) -->
+                <!-- Added ID "simulator-section" to control visibility -->
+                <section id="simulator-section"
+                    class="bg-white rounded-2xl shadow-soft border border-slate-200/60 overflow-hidden ring-4 ring-slate-50/50 mb-8">
+                    <!-- Browser Header UI -->
+                    <div class="bg-slate-50 px-5 py-3 border-b border-slate-200/80 flex items-center gap-4">
+                        <div class="flex gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400/80"></div>
+                        </div>
+                        <!-- Fake Address Bar -->
+                        <div
+                            class="flex-1 max-w-xl mx-auto bg-white border border-slate-200 rounded-md h-8 flex items-center px-3 text-xs text-slate-400 shadow-sm">
+                            <i class="ph ph-lock-key mr-2 text-slate-300"></i>
+                            <span class="truncate">https://seo-guide.com/preview/live</span>
+                        </div>
+                        <div class="flex items-center gap-2 ml-auto">
+                            <span
+                                class="text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-white px-2 py-1 rounded border border-slate-200">Interactive
+                                Preview</span>
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:p-10 bg-white min-h-[300px] flex flex-col justify-center">
+                        <div id="simulator-container">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. Info Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                    <!-- Left: Knowledge Base (7 cols) -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- Definition Card -->
+                        <div
+                            class="bg-white p-8 rounded-2xl shadow-soft border border-slate-100 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-6 opacity-5">
+                                <i class="ph-duotone ph-book-open-text text-8xl text-slate-900"></i>
+                            </div>
+                            <h4 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                                <span
+                                    class="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                    <i class="ph-duotone ph-info text-xl"></i>
+                                </span>
+                                定義與用途
+                            </h4>
+                            <p id="info-desc" class="text-slate-600 leading-8 text-[15px] font-medium">
+                                <!-- Desc -->
+                            </p>
+                        </div>
+
+                        <!-- Algorithm Insight Card -->
+                        <div
+                            class="bg-white p-8 rounded-2xl shadow-soft border border-slate-100 flex flex-col h-full relative overflow-hidden group">
+                            <!-- Color Strip -->
+                            <div id="algo-color-strip" class="absolute left-0 top-0 bottom-0 w-1.5 bg-green-500"></div>
+
+                            <div class="flex justify-between items-start mb-6">
+                                <h4 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                    <span id="algo-icon-container"
+                                        class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                        <i class="ph-duotone ph-cpu text-xl"></i>
+                                    </span>
+                                    <span id="algo-header-text">演算法觀點</span>
+                                </h4>
+                                <span id="algo-badge"
+                                    class="text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wide border bg-white"></span>
+                            </div>
+
+                            <div class="relative pl-4 mb-6">
+                                <i class="ph-fill ph-quotes text-slate-200 text-4xl absolute -top-3 -left-2 -z-10"></i>
+                                <p id="algo-text" class="text-slate-600 leading-7 italic text-[15px]">
+                                    <!-- Algo text -->
+                                </p>
+                            </div>
+
+                            <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Source
+                                    Reference</span>
+                                <a id="algo-source" href="#" target="_blank" rel="nofollow noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 text-xs font-bold text-primary-600 hover:text-primary-700 transition-colors group-hover:underline decoration-2 underline-offset-2">
+                                    Google Search Central
+                                    <i class="ph-bold ph-arrow-square-out"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Code Snippet (5 cols) -->
+                    <div class="lg:col-span-5 sticky top-24">
+                        <div
+                            class="bg-slate-850 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-slate-900/10 flex flex-col">
+                            <div
+                                class="bg-slate-900/50 px-5 py-4 flex justify-between items-center border-b border-white/10">
+                                <div class="flex items-center gap-2">
+                                    <i class="ph-fill ph-code text-slate-400"></i>
+                                    <span class="text-xs font-bold text-slate-300 font-mono tracking-wide">HTML
+                                        SOURCE</span>
+                                </div>
+                                <button onclick="copyCode()"
+                                    class="text-slate-400 hover:text-white transition-colors p-1.5 rounded-md hover:bg-white/10 active:scale-95 transform duration-100"
+                                    title="Copy to Clipboard">
+                                    <i class="ph-bold ph-copy text-lg"></i>
+                                </button>
+                            </div>
+                            <div class="p-6 overflow-x-auto custom-scrollbar bg-[#1e293b]">
+                                <code id="code-preview"
+                                    class="font-mono text-sm leading-relaxed text-emerald-400 block whitespace-pre-wrap break-all">
+                                    <!-- Code -->
+                                </code>
+                            </div>
+                        </div>
+
+                        <!-- Tip Box -->
+                        <div class="mt-4 bg-blue-50/50 border border-blue-100 rounded-xl p-4 flex gap-3">
+                            <i class="ph-fill ph-lightbulb text-amber-400 text-xl flex-shrink-0 mt-0.5"></i>
+                            <p class="text-xs text-blue-800/80 leading-5">
+                                <strong>Pro Tip:</strong> 始終確保您的標籤在 `
+
+                                <head>` 區域內的順序正確，以獲得最佳解析效能。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-12 text-center border-t border-slate-200/60 pt-8 pb-4">
+                <p class="text-slate-400 text-sm font-medium">&copy; 2025 SEO Introduction.</p>
+                <p class="text-xs text-slate-300 mt-2">Designed for Human Readability.</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // --- 1. Data Store (Complete Content) ---
+        const CATEGORIES = [
+            { id: 'core', name: '核心 (Core)', icon: 'ph-star' },
+            { id: 'content', name: '內容 (Content)', icon: 'ph-article' },
+            { id: 'tech', name: '技術 (Technical)', icon: 'ph-code' },
+            { id: 'link', name: '連結 (Link)', icon: 'ph-link' },
+            { id: 'social', name: '社群 (Social)', icon: 'ph-share-network' },
+            { id: 'mobile', name: '行動 (Mobile)', icon: 'ph-device-mobile' },
+            { id: 'other', name: '其他 (Other)', icon: 'ph-dots-three-circle' }
+        ];
+
+        // simType: 'basic' = Static (Hidden simulator), 'serp'/'social'/'link_juice' = Interactive (Visible)
+        const SEO_DATA = {
+            'core': [
+                {
+                    rank: 1,
+                    name: '<title>',
+                    desc: '定義瀏覽器標題列和搜尋結果頁 (SERP) 中顯示的標題。這是 On-Page SEO 最重要的單一標籤，直接影響點擊率與關鍵字排名。',
+                    code: '<title>你的頁面標題 | 品牌名稱</title>',
+                    simType: 'serp',
+                    algo: { type: 'official', text: '【官方證實】Google 確認標題是關鍵排名因素之一。標題應精準描述內容並包含關鍵字。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/title-link' }
+                },
+                {
+                    rank: 2,
+                    name: 'Meta Description',
+                    desc: '提供頁面內容的簡短摘要。雖然不直接影響排名，但極大影響搜尋結果頁的點擊率 (CTR)。',
+                    code: '<meta name="description" content="這是一段吸引人的描述，約150-160字元。">',
+                    simType: 'serp',
+                    algo: { type: 'official', text: '【官方證實】Google 明確表示 Meta Description 「不是」排名因素，但它控制了搜尋摘要 (Snippet) 的生成，影響點擊率。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/snippet' }
+                },
+                {
+                    rank: 3,
+                    name: '<h1> Header',
+                    desc: '頁面的主標題。通常每個頁面應該只有一個 H1，清楚告訴使用者和搜尋引擎頁面的核心主題。',
+                    code: '<h1>這是頁面最重要的標題</h1>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】標題標籤 (H1-H6) 用於協助 Google 理解內容結構。Google 發言人曾表示「多個 H1 不是問題」，但建議保持層次清晰。', sourceName: 'Google Search Central (John Mueller)', sourceUrl: 'https://www.youtube.com/watch?v=Zyqsq_e4eB4' }
+                },
+                {
+                    rank: 4,
+                    name: 'Canonical Tag',
+                    desc: '當有多個網址指向相同或極其相似的內容時，告訴搜尋引擎哪一個是「標準版本」，避免重複內容問題。',
+                    code: '<link rel="canonical" href="https://example.com/page/">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 強烈建議使用 Canonical 標籤來合併重複的 URL 訊號，這是解決重複內容問題的官方方案。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls' }
+                },
+                {
+                    rank: 5,
+                    name: 'Robots Meta Tag',
+                    desc: '控制搜尋引擎如何索引該頁面。例如：是否允許索引 (index/noindex) 或是否允許追蹤連結 (follow/nofollow)。',
+                    code: '<meta name="robots" content="index, follow">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】這是控制頁面是否出現在搜尋結果中的直接指令。若設為 noindex，Google 必定會將其移除。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag' }
+                },
+                {
+                    rank: 6,
+                    name: 'Structured Data (JSON-LD)',
+                    desc: '使用標準化格式 (Schema.org) 提供關於頁面的明確線索，幫助 Google 理解內容並生成複合式搜尋結果 (Rich Results)。',
+                    code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Article", ...\n}\n<\/script>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 支援並推薦使用 JSON-LD 來啟用豐富搜尋結果（如食譜、職缺、活動），這能顯著提升點擊率。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data' }
+                },
+                {
+                    rank: 7,
+                    name: 'Open Graph Tags',
+                    desc: '控制內容在社群媒體分享時的標題、圖片和描述。雖屬社群類，但已成為每個網頁的「核心標準配置」。',
+                    code: '<meta property="og:title" content="...">',
+                    simType: 'social',
+                    algo: { type: 'official', text: '【官方證實】Google 表示這些標籤不直接影響搜尋排名，但對於社群流量獲取至關重要。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Favicon',
+                    desc: '瀏覽器分頁和手機搜尋結果中顯示的小圖示。增加品牌識別度與點擊率。',
+                    code: '<link rel="icon" href="/favicon.ico" sizes="any">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Favicon 會顯示在行動搜尋結果中。Google 有明確的技術指南來確保其正確顯示。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/favicon-in-search' }
+                },
+                {
+                    rank: 9,
+                    name: 'Breadcrumb Schema',
+                    desc: '麵包屑導航的結構化資料，讓搜尋結果顯示層級路徑而非單純網址。',
+                    code: '<script type="application/ld+json">{ "@type": "BreadcrumbList", ... }<\/script>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】有助於 Google 理解網站結構，並在搜尋結果中呈現更友善的路徑顯示。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/structured-data/breadcrumb' }
+                },
+                {
+                    rank: 10,
+                    name: 'Viewport Meta',
+                    desc: '行動裝置瀏覽的基礎配置。沒有它，網頁在手機上會顯示為縮小的桌面版。',
+                    code: '<meta name="viewport" content="width=device-width, initial-scale=1">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】這是行動優先索引的基本要求。沒有正確配置 Viewport 的網頁在行動搜尋中會處於極大劣勢。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                }
+            ],
+            'content': [
+                {
+                    rank: 1,
+                    name: 'E-E-A-T Quality',
+                    desc: 'Google 內容品質核心標準：經驗、專業、權威、信任。商業網站必須展現專業度。',
+                    code: '<!-- 透過作者介紹、專業引用、詳細內容來體現 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】E-E-A-T 是搜尋品質評分指南的核心，特別是 YMYL (Your Money Your Life) 類型的商業網站。', sourceName: 'Google Search Quality Guidelines', sourceUrl: 'https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t' }
+                },
+                {
+                    rank: 2,
+                    name: 'Keyword Optimization',
+                    desc: '將目標關鍵字自然地佈局在標題、首段、H2 子標題中。避免關鍵字堆疊。',
+                    code: '<h2>為什麼選擇我們的 [核心關鍵字] 服務？</h2>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】關鍵字仍是 Google 理解頁面主題的基礎，但現代演算法更看重語意相關性而非單純出現次數。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 3,
+                    name: 'Header Tags (H2-H6)',
+                    desc: '使用 H2, H3 等標籤構建清晰的文章結構。有助於閱讀，也讓爬蟲更容易抓取重點。',
+                    code: '<h2>產品特色</h2>\n<h3>耐用性</h3>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】結構化的標題有助於 Google 理解段落大意，這對於爭取精選摘要 (Featured Snippets) 非常重要。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 4,
+                    name: 'Image Alt Text',
+                    desc: '圖片替代文字。電商網站必備，讓商品圖片能在 Google 圖片搜尋中被找到。',
+                    code: '<img src="shoe.jpg" alt="紅色慢跑鞋側面圖">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Alt 文字是圖片搜尋排名的主要依據。同時也是網頁無障礙性 (Accessibility) 的必要項目。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/google-images' }
+                },
+                {
+                    rank: 5,
+                    name: 'Internal Links',
+                    desc: '文章或產品頁之間的內部連結。建立內容關聯性，增加使用者停留時間。',
+                    code: '延伸閱讀：<a href="/related-post">選購指南</a>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】內部連結幫助 Google 發現新頁面並傳遞頁面權重 (Link Juice)。孤立頁面很難獲得好排名。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 6,
+                    name: 'Content Freshness',
+                    desc: '定期更新舊內容。對於新聞、促銷或技術類主題，新鮮度是關鍵。',
+                    code: '<p>最後更新：2025年11月</p>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】對於 "Query Deserves Freshness" (QDF) 類型的查詢，內容的新鮮程度直接影響排名。', sourceName: 'Google Blog', sourceUrl: '#' }
+                },
+                {
+                    rank: 7,
+                    name: 'Product/Review Schema',
+                    desc: '針對產品頁面加入價格、庫存、評分等結構化資料。',
+                    code: '<script type="application/ld+json">{"@type": "Product", "name": "...", "offers": ...}<\/script>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】這是讓搜尋結果顯示星級評分、價格、庫存狀態的唯一方法，能顯著提升點擊率。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Lists & Tables',
+                    desc: '使用 `<ul>`, `<ol>`, `<table>` 展示規格或步驟。極易被 Google 抓取為精選摘要。',
+                    code: '<ul><li>優點1</li><li>優點2</li></ul>',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】觀察數據顯示，結構清晰的列表和表格是佔領 "Position Zero" (精選摘要) 的最佳格式。', sourceName: 'Search Engine Land', sourceUrl: '#' }
+                },
+                {
+                    rank: 9,
+                    name: 'Video Content',
+                    desc: '嵌入 YouTube 或其他影片介紹。增加停留時間，並有機會出現在影片搜尋結果中。',
+                    code: '<iframe src="youtube.com/embed/..."></iframe>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】影片是極強的訊號。Google 建議使用 VideoObject Schema 來幫助標記影片內容。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 10,
+                    name: 'FAQ Section',
+                    desc: '常見問題區塊。針對 "How to" 或 "What is" 的長尾關鍵字進行佈局。',
+                    code: '<h3>如何退貨？</h3><p>...</p>',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】FAQ 內容不僅能回應語音搜尋，配合 FAQ Schema 還能佔據更大的搜尋版面。', sourceName: 'Moz', sourceUrl: '#' }
+                }
+            ],
+            'tech': [
+                {
+                    rank: 1,
+                    name: 'Core Web Vitals',
+                    desc: '網站體驗核心指標：LCP (載入速度)、FID/INP (互動延遲)、CLS (視覺穩定性)。',
+                    code: '<!-- 需透過 PageSpeed Insights 檢測 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】自 2021 年起，這是明確的排名因素。體驗不佳的網站（如載入慢、版面亂跳）排名會受影響。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/appearance/page-experience' }
+                },
+                {
+                    rank: 2,
+                    name: 'HTTPS (SSL)',
+                    desc: '全站加密。現代網站的標準配置，瀏覽器會標示不安全網站。',
+                    code: 'https://example.com',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 早在 2014 年就將 HTTPS 列為排名信號。安全性是信任的基礎。', sourceName: 'Google Security Blog', sourceUrl: 'https://security.googleblog.com/2014/08/https-as-ranking-signal.html' }
+                },
+                {
+                    rank: 3,
+                    name: 'XML Sitemap',
+                    desc: '網站地圖。主動告訴搜尋引擎網站有哪些頁面，確保所有重要頁面都被索引。',
+                    code: '<urlset><url><loc>https://...</loc></url></urlset>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】對於新網站或大型網站，提交 Sitemap 是確保內容被快速發現的最有效方式。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview' }
+                },
+                {
+                    rank: 4,
+                    name: 'Robots.txt',
+                    desc: '爬蟲協議。控制搜尋引擎可以訪問哪些目錄，節省爬蟲預算。',
+                    code: 'User-agent: *\nDisallow: /checkout/',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】這是控制網站訪問權限的第一道防線。錯誤設定（如 Disallow: /）會導致全站消失。', sourceName: 'Google Search Central', sourceUrl: 'https://developers.google.com/search/docs/crawling-indexing/robots/intro' }
+                },
+                {
+                    rank: 5,
+                    name: 'Canonical Tag',
+                    desc: '標準網址宣告。解決產品頁參數導致的重複內容問題 (Duplicate Content)。',
+                    code: '<link rel="canonical" href="..." />',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】對於電商特別重要（如 ?color=red 頁面），這告訴 Google 哪個是主要頁面以集中權重。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 6,
+                    name: 'Breadcrumbs',
+                    desc: '麵包屑導航。改善使用者路徑體驗，同時加強網站結構的層級關係。',
+                    code: '<nav>首頁 > 分類 > 產品</nav>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 強烈建議使用麵包屑，這有助於爬蟲理解網站架構。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 7,
+                    name: '301 Redirect',
+                    desc: '永久轉址。網站改版或網址變更時，將舊權重轉移到新網址的唯一方式。',
+                    code: 'Redirect 301 /old-url /new-url',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】使用 301 轉址可以保留絕大部分的 PageRank。錯誤使用 302（暫時轉址）會導致權重流失。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Hreflang',
+                    desc: '多語言標記。針對跨國商業網站，指定不同地區/語言對應的頁面。',
+                    code: '<link rel="alternate" hreflang="en-us" ...>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】這是解決國際 SEO 問題的標準方案，確保美國用戶看到英文版，台灣用戶看到中文版。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 9,
+                    name: '404 Page Config',
+                    desc: '自定義 404 頁面。當產品下架或連結失效時，引導使用者回到首頁或推薦商品。',
+                    code: '<!-- 包含搜尋框與熱門商品推薦 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】404 本身不扣分，但如果 404 頁面體驗差導致使用者立即跳出，則可能影響信任度。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 10,
+                    name: 'Structured Data (General)',
+                    desc: '除產品外的通用結構化資料，如 Organization (組織)、LocalBusiness (商家)。',
+                    code: '<script type="application/ld+json">...<\/script>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】幫助 Google 建立知識圖譜 (Knowledge Graph)，增加品牌在搜尋結果中的權威顯示。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                }
+            ],
+            'link': [
+                {
+                    rank: 1,
+                    name: 'Backlink Quality',
+                    desc: '反向連結品質。來自高權重、相關性高網站的連結是 SEO 的強力信任票。',
+                    code: '<a href="https://yoursite.com">推薦</a>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】PageRank 演算法的核心。連結品質遠比數量重要。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 2,
+                    name: 'Internal Link Structure',
+                    desc: '內部連結策略。透過文章連結到產品頁，傳遞權重並引導轉換。',
+                    code: '<a href="/product/abc">購買連結</a>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】這是告訴 Google 哪些頁面最重要（通常被連結最多）的方式。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 3,
+                    name: 'Broken Link Fixing',
+                    desc: '修復死連結。大量的 404 死連結會浪費爬蟲預算並降低使用者體驗。',
+                    code: '<!-- 定期檢查並修復 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 建議定期檢查連結健康度，這屬於網站維護的基本要求。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 4,
+                    name: 'Anchor Text',
+                    desc: '錨點文字。連結的可點擊文字應具描述性，包含目標關鍵字（但勿濫用）。',
+                    code: '<a href="...">SEO 服務價格</a>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】錨點文字幫助 Google 理解目標頁面的主題。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 5,
+                    name: 'rel="nofollow"',
+                    desc: '控制權重流出。對於付費連結、廣告或不可信的外部連結使用。',
+                    code: 'rel="nofollow"',
+                    simType: 'link_juice',
+                    algo: { type: 'official', text: '【官方證實】自 2019 年起，Google 將其視為「提示」。這能保護網站不因連結到壞鄰居而受罰。', sourceName: 'Google Blog', sourceUrl: 'https://developers.google.com/search/blog/2019/09/evolving-nofollow-new-ways-to-identify' }
+                },
+                {
+                    rank: 6,
+                    name: 'rel="sponsored"',
+                    desc: '贊助連結屬性。專用於廣告或付費合作文章的連結。',
+                    code: 'rel="sponsored"',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】若未標示付費連結，可能違反 Google 的連結方案 (Link Schemes) 政策而遭受懲罰。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 7,
+                    name: 'Disavow Toxic Links',
+                    desc: '拒絕有毒連結。主動向 Google 聲明忽略來自垃圾網站的惡意連結。',
+                    code: '<!-- 透過 Search Console 提交 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】僅建議在受到手動懲罰或大量垃圾連結攻擊時使用，屬於進階防禦手段。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Outbound Authority Links',
+                    desc: '連結至權威來源。適度引用高公信力網站（如政府、學術機構）可增加內容可信度。',
+                    code: '<a href="https://gov.tw">資料來源</a>',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】雖然不是直接排名因素，但連結到權威來源有助於建立 E-E-A-T 中的「信任」。', sourceName: 'Moz', sourceUrl: '#' }
+                },
+                {
+                    rank: 9,
+                    name: 'Social Signals (Indirect)',
+                    desc: '來自社群的連結訊號。',
+                    code: '<!-- FB/Twitter/IG -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 多次聲明社群按讚/分享不直接影響排名，但它們帶來的流量和品牌曝光有間接助益。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 10,
+                    name: 'Permalinks Structure',
+                    desc: '永久連結結構。保持網址簡短、具描述性且不包含日期（除非是新聞），利於長期累積權重。',
+                    code: '/category/product-name',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】簡單的 URL 結構有助於索引和使用者分享。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                }
+            ],
+            'social': [
+                {
+                    rank: 1,
+                    name: 'og:image',
+                    desc: 'Open Graph 圖片。決定連結在 FB/Line 分享時的吸睛度，直接影響社群點擊率 (CTR)。',
+                    code: '<meta property="og:image" content="...">',
+                    simType: 'social',
+                    algo: { type: 'official', text: '【官方證實】非搜尋排名因素，但在社群演算法中，高點擊率的內容會獲得更多擴散。', sourceName: 'Meta for Developers', sourceUrl: '#' }
+                },
+                {
+                    rank: 2,
+                    name: 'og:title',
+                    desc: '社群標題。可以比 SEO 標題更具話題性或促銷感。',
+                    code: '<meta property="og:title" content="...">',
+                    simType: 'social',
+                    algo: { type: 'official', text: '【官方證實】用於定義分享卡片的標題。', sourceName: 'ogp.me', sourceUrl: '#' }
+                },
+                {
+                    rank: 3,
+                    name: 'og:description',
+                    desc: '社群描述。補充標題資訊，增加點擊誘因。',
+                    code: '<meta property="og:description" content="...">',
+                    simType: 'social',
+                    algo: { type: 'official', text: '【官方證實】用於定義分享卡片的摘要文字。', sourceName: 'ogp.me', sourceUrl: '#' }
+                },
+                {
+                    rank: 4,
+                    name: 'Twitter Cards',
+                    desc: 'Twitter 專用卡片標記。summary_large_image 能佔據最大版面。',
+                    code: '<meta name="twitter:card" content="summary_large_image">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Twitter (X) 優先顯示帶有卡片標記的連結。', sourceName: 'Twitter Developers', sourceUrl: '#' }
+                },
+                {
+                    rank: 5,
+                    name: 'Social Profile Schema',
+                    desc: 'SameAs 標記。告訴 Google 哪些社群帳號屬於該品牌，有助於知識圖譜顯示。',
+                    code: '"sameAs": ["https://facebook.com/brand", ...]',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】幫助 Google 識別品牌實體 (Entity) 及其關聯的社群資產。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 6,
+                    name: 'Facebook App ID',
+                    desc: 'FB 應用程式編號。用於啟用 Facebook Insights 數據分析。',
+                    code: '<meta property="fb:app_id" content="...">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】管理員工具的必要配置。', sourceName: 'Meta for Developers', sourceUrl: '#' }
+                },
+                {
+                    rank: 7,
+                    name: 'LinkedIn Sharing',
+                    desc: 'LinkedIn 分享優化。B2B 商業環境特別重要。',
+                    code: '<meta property="og:..." > <!-- 使用 OG 協議 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】LinkedIn 使用標準 OG 標籤來生成預覽。', sourceName: 'LinkedIn Developers', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Pinterest Rich Pins',
+                    desc: 'Pinterest 豐富圖釘。直接顯示產品價格和庫存狀態，電商必備。',
+                    code: '<meta property="product:price:amount" ...>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】能顯著提高 Pinterest 上的轉換率。', sourceName: 'Pinterest Developers', sourceUrl: '#' }
+                },
+                {
+                    rank: 9,
+                    name: 'Social Share Buttons',
+                    desc: '網頁上的分享按鈕。降低使用者分享門檻。',
+                    code: '<!-- 按鈕 UI 元件 -->',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】雖然不是標籤，但增加分享便利性有助於獲得更多外部連結（間接 SEO 效益）。', sourceName: 'Community', sourceUrl: '#' }
+                },
+                {
+                    rank: 10,
+                    name: 'YouTube Embeds',
+                    desc: '嵌入 YouTube 影片。增加網頁互動性。',
+                    code: '<iframe ...></iframe>',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】高互動和長停留時間對排名有正面影響。', sourceName: 'Community', sourceUrl: '#' }
+                }
+            ],
+            'mobile': [
+                {
+                    rank: 1,
+                    name: 'Viewport Meta',
+                    desc: 'RWD 視口設定。行動優先索引的絕對基礎。',
+                    code: '<meta name="viewport" content="width=device-width, initial-scale=1">',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 強制要求。沒有它的網站在手機上幾乎無法閱讀，排名會大幅下降。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 2,
+                    name: 'Mobile Page Speed',
+                    desc: '行動版載入速度。行動網路環境不穩，速度更顯重要。',
+                    code: '<!-- 圖片壓縮、快取策略 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】行動版速度是明確的排名因素 (Speed Update)。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 3,
+                    name: 'Touch Targets',
+                    desc: '觸控目標大小。按鈕不能太小或太近，避免「肥手指」誤觸。',
+                    code: 'min-width: 48px; min-height: 48px;',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Search Console 會報告「可點擊元素靠得太近」錯誤，影響行動可用性評分。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 4,
+                    name: 'No Intrusive Interstitials',
+                    desc: '避免蓋版廣告。剛進入頁面時不應有全螢幕彈窗遮擋內容。',
+                    code: '<!-- 使用橫幅取代全螢幕彈窗 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 會懲罰使用侵入性插頁廣告的行動網頁，因為這嚴重影響使用者體驗。', sourceName: 'Google Blog', sourceUrl: '#' }
+                },
+                {
+                    rank: 5,
+                    name: 'Font Size Readability',
+                    desc: '字體可讀性。內文至少 16px，無需縮放即可閱讀。',
+                    code: 'body { font-size: 16px; }',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】字體過小會被標記為行動裝置可用性錯誤。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 6,
+                    name: 'Click-to-Call',
+                    desc: '電話連結。讓手機用戶點擊電話號碼即可撥打，對在地商家非常重要。',
+                    code: '<a href="tel:+886-2-12345678">撥打電話</a>',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】提升行動用戶的轉換率與體驗。', sourceName: 'Community', sourceUrl: '#' }
+                },
+                {
+                    rank: 7,
+                    name: 'Sticky Navigation',
+                    desc: '置頂/置底選單。方便手機用戶在長頁面中隨時導航。',
+                    code: 'position: sticky; bottom: 0;',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】良好的 UX 設計，有助於降低跳出率。', sourceName: 'Community', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Hamburger Menu',
+                    desc: '漢堡選單。收納導航項目，節省螢幕空間。',
+                    code: '<!-- Mobile Nav Pattern -->',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】標準的行動 UI 模式，使用者習慣的導航方式。', sourceName: 'Community', sourceUrl: '#' }
+                },
+                {
+                    rank: 9,
+                    name: 'PWA Manifest',
+                    desc: 'Web App 清單。允許使用者將網站安裝到主畫面，提供類似 App 的體驗。',
+                    code: '<link rel="manifest" href="/manifest.json">',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】雖然不是直接 SEO 因素，但 PWA 通常速度快、體驗好，間接有利。', sourceName: 'Google Developers', sourceUrl: '#' }
+                },
+                {
+                    rank: 10,
+                    name: 'AMP (Accelerated Mobile Pages)',
+                    desc: '加速行動頁面。雖然不再強制，但在新聞媒體業仍是提升速度的利器。',
+                    code: '<html ⚡>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】AMP 提供極致的載入速度，這對排名有正面影響。', sourceName: 'amp.dev', sourceUrl: '#' }
+                }
+            ],
+            'other': [
+                {
+                    rank: 1,
+                    name: 'Google Business Profile',
+                    desc: 'Google 商家檔案。對於實體店面，這是最重要的「本地 SEO」因素，決定地圖排名。',
+                    code: '<!-- 需至 Google 商家中心註冊 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】影響 Local Pack (地圖三包) 排名的核心因素。', sourceName: 'Google Business Profile', sourceUrl: '#' }
+                },
+                {
+                    rank: 2,
+                    name: 'Local Reviews',
+                    desc: '商家評論。評論的數量與星等直接影響點擊率與本地排名。',
+                    code: '<!-- 鼓勵用戶評論 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】Google 確認評論數量和評分會影響本地搜尋排名。', sourceName: 'Google Business Profile Help', sourceUrl: '#' }
+                },
+                {
+                    rank: 3,
+                    name: 'NAP Consistency',
+                    desc: '名稱、地址、電話的一致性。在官網、社群、黃頁上必須完全一致。',
+                    code: '<address>...</address>',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】一致的 NAP 訊號有助於 Google 確認商家的真實性與可信度。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 4,
+                    name: 'User Experience Signals',
+                    desc: '使用者體驗訊號（停留時間、跳出率）。',
+                    code: '<!-- 內容吸引力 -->',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】雖然 Google 否認直接使用 GA 數據，但 RankBrain 演算法確實會參考用戶滿意度（如是否立即返回搜尋結果）。', sourceName: 'Backlinko', sourceUrl: '#' }
+                },
+                {
+                    rank: 5,
+                    name: 'Voice Search',
+                    desc: '語音搜尋優化。針對口語化提問進行優化。',
+                    code: '<!-- 使用自然語言問答 -->',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】隨著智慧音箱普及，針對 "How to" 的優化越來越重要。', sourceName: 'Search Engine Land', sourceUrl: '#' }
+                },
+                {
+                    rank: 6,
+                    name: 'Video SEO',
+                    desc: '影片搜尋優化。包含影片標題、說明、字幕檔 (CC) 及章節標記。',
+                    code: '<!-- 影片 Metadata -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】影片章節 (Key Moments) 能直接出現在搜尋結果中，佔據極大版面。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                },
+                {
+                    rank: 7,
+                    name: 'Privacy & Cookie Consent',
+                    desc: '隱私權與 Cookie 同意。符合法規要求 (GDPR/CCPA)。',
+                    code: '<!-- 同意彈窗 -->',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】網站信任度的一部分。Chrome 瀏覽器也越來越重視隱私標準。', sourceName: 'Google Privacy', sourceUrl: '#' }
+                },
+                {
+                    rank: 8,
+                    name: 'Brand Mentions',
+                    desc: '品牌提及。即使沒有連結，網路上對品牌的討論也是一種信號。',
+                    code: '<!-- 品牌聲量 -->',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】無連結的提及 (Implied Links) 可能被 Google 用來驗證品牌權威性。', sourceName: 'Moz', sourceUrl: '#' }
+                },
+                {
+                    rank: 9,
+                    name: 'Accessibility (A11y)',
+                    desc: '無障礙設計。確保視障人士也能使用網站（如 ARIA 標籤、對比度）。',
+                    code: 'aria-label="..."',
+                    simType: 'basic',
+                    algo: { type: 'guess', text: '【業界推測】雖然不是直接排名因素，但無障礙設計通常意味著更好的代碼結構與體驗，這對 SEO 有利。', sourceName: 'W3C', sourceUrl: '#' }
+                },
+                {
+                    rank: 10,
+                    name: 'Author Authority',
+                    desc: '作者權威度。清楚標示文章作者及其專業背景。',
+                    code: 'Rel="author" (concept)',
+                    simType: 'basic',
+                    algo: { type: 'official', text: '【官方證實】雖然不再使用 rel=author 標記，但作者的專業度是 E-E-A-T 評估的重要環節。', sourceName: 'Google Search Central', sourceUrl: '#' }
+                }
+            ]
+        };
+
+        // --- 2. State & DOM ---
+        let state = {
+            activeCategory: 'core',
+            activeTagIndex: 0
+        };
+
+        const els = {
+            sidebar: document.getElementById('sidebar'),
+            mobileMenuBtn: document.getElementById('mobile-menu-btn'),
+            sidebarClose: document.getElementById('sidebar-close'),
+            navTree: document.getElementById('nav-tree'),
+
+            // Header
+            headerCatName: document.getElementById('header-category-name'),
+            headerRank: document.getElementById('header-rank'),
+            headerTagName: document.getElementById('header-tag-name'),
+            headerBadgeContainer: document.getElementById('header-badge-container'),
+
+            // Sim & Info
+            simSection: document.getElementById('simulator-section'), // The new wrapper to toggle
+            simContainer: document.getElementById('simulator-container'),
+            infoDesc: document.getElementById('info-desc'),
+            algoColorStrip: document.getElementById('algo-color-strip'),
+            algoBadge: document.getElementById('algo-badge'),
+
+            // Updated Algo Text Elements
+            algoHeaderText: document.getElementById('algo-header-text'),
+            algoIconContainer: document.getElementById('algo-icon-container'),
+
+            algoText: document.getElementById('algo-text'),
+            algoSource: document.getElementById('algo-source'),
+            codePreview: document.getElementById('code-preview')
+        };
+
+        // --- 3. Render Logic ---
+
+        function init() {
+            renderNavigation();
+            renderMainContent();
+            setupEventListeners();
+        }
+
+        function renderNavigation() {
+            let html = '';
+
+            CATEGORIES.forEach(cat => {
+                const isActiveCat = state.activeCategory === cat.id;
+
+                // Active Category Styling
+                const catBg = isActiveCat
+                    ? 'bg-slate-50 text-primary-700 font-semibold'
+                    : 'text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-900';
+
+                const catIconColor = isActiveCat ? 'text-primary-600' : 'text-slate-400';
+
+                html += `
+                    <div class="mb-1">
+                        <button onclick="setCategory('${cat.id}')" 
+                                class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-[13px] transition-all duration-200 group ${catBg}">
+                            <div class="flex items-center gap-3">
+                                <i class="${isActiveCat ? 'ph-fill' : 'ph'} ${cat.icon} text-lg transition-colors ${catIconColor}"></i>
+                                <span>${cat.name}</span>
+                            </div>
+                            <i class="ph-bold ph-caret-down text-slate-300 text-xs transition-transform duration-300 ${isActiveCat ? 'rotate-180 text-primary-500' : 'group-hover:text-slate-400'}"></i>
+                        </button>
+                `;
+
+                // Accordion Body
+                if (isActiveCat) {
+                    const tags = SEO_DATA[cat.id];
+                    html += `<div class="mt-1 mb-2 ml-[19px] pl-3 border-l-[1.5px] border-slate-100 space-y-0.5 fade-in">`;
+
+                    tags.forEach((tag, index) => {
+                        const isActiveTag = state.activeTagIndex === index;
+
+                        // Active Tag Styling
+                        let tagBaseClass = "relative w-full text-left px-3 py-2 rounded-md text-[13px] transition-all duration-200 flex items-center gap-2.5 outline-none";
+                        let tagStateClass = isActiveTag
+                            ? 'bg-primary-50 text-primary-700 font-semibold'
+                            : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50/50';
+
+                        // Rank Icons
+                        let rankIcon;
+                        if (tag.rank === 1) rankIcon = `<i class="ph-fill ph-trophy text-amber-500 text-sm"></i>`;
+                        else if (tag.rank === 2) rankIcon = `<i class="ph-fill ph-medal text-slate-400 text-sm"></i>`;
+                        else if (tag.rank === 3) rankIcon = `<i class="ph-fill ph-medal text-orange-400 text-sm"></i>`;
+                        else rankIcon = `<span class="text-[10px] w-3.5 text-center font-mono text-slate-300">${tag.rank}</span>`;
+
+                        html += `
+                            <button onclick="setTag(${index})" class="${tagBaseClass} ${tagStateClass}">
+                                ${isActiveTag ? '<div class="absolute left-0 top-1/2 -translate-y-1/2 -ml-[13.5px] w-[3px] h-4 bg-primary-500 rounded-full"></div>' : ''}
+                                <div class="flex-shrink-0 flex justify-center">${rankIcon}</div>
+                                <span class="truncate leading-none pt-0.5">${tag.name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>
+                            </button>
+                        `;
+                    });
+
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+            });
+
+            els.navTree.innerHTML = html;
+        }
+
+        function renderMainContent() {
+            const tag = SEO_DATA[state.activeCategory][state.activeTagIndex];
+            const category = CATEGORIES.find(c => c.id === state.activeCategory);
+
+            // 1. Header Logic
+            els.headerCatName.innerText = category.name.split(' ')[0];
+            els.headerRank.innerText = tag.rank;
+            els.headerTagName.innerText = tag.name;
+
+            // Badge Styling
+            if (tag.rank <= 3) {
+                els.headerBadgeContainer.innerHTML = `
+                    <div class="px-3 py-1.5 rounded-full bg-gradient-to-r from-red-50 to-orange-50 border border-red-100/50 shadow-sm flex items-center gap-1.5 group cursor-default">
+                        <div class="bg-white p-0.5 rounded-full shadow-sm">
+                            <i class="ph-fill ph-fire text-red-500 text-xs"></i>
+                        </div>
+                        <span class="text-[11px] font-bold uppercase tracking-wide text-red-700">High Priority</span>
+                    </div>
+                `;
+            } else {
+                els.headerBadgeContainer.innerHTML = '';
+            }
+
+            // 2. Info Cards
+            els.infoDesc.innerText = tag.desc;
+            els.codePreview.innerText = tag.code;
+
+            // 3. Algo Card Styling & Logic
+            const isOfficial = tag.algo.type === 'official';
+            const colorClass = isOfficial ? 'text-emerald-700 bg-emerald-50 border-emerald-200' : 'text-amber-700 bg-amber-50 border-amber-200';
+            const stripClass = isOfficial ? 'bg-emerald-500' : 'bg-amber-500';
+
+            // --- Update 1: Dynamic Header Text ---
+            els.algoHeaderText.innerText = isOfficial ? 'Google 官方觀點' : '業界推測觀點';
+
+            // Update Icon Container Colors to match
+            els.algoIconContainer.className = `w-8 h-8 rounded-lg flex items-center justify-center text-xl ${isOfficial ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`;
+
+            els.algoBadge.innerText = isOfficial ? '官方公布 (Official)' : '業界推測 (Community)';
+            els.algoBadge.className = `text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wide border ${colorClass}`;
+            els.algoColorStrip.className = `absolute left-0 top-0 bottom-0 w-1.5 ${stripClass}`;
+
+            els.algoText.innerText = tag.algo.text;
+            els.algoSource.innerText = tag.algo.sourceName;
+            els.algoSource.href = tag.algo.sourceUrl;
+
+            // 4. Render Simulator (Logic to Hide/Show)
+            const interactiveTypes = ['serp', 'social', 'link_juice'];
+            if (interactiveTypes.includes(tag.simType)) {
+                // Show the simulator section
+                els.simSection.style.display = 'block';
+                renderSimulator(tag);
+            } else {
+                // Hide the simulator section entirely
+                els.simSection.style.display = 'none';
+            }
+        }
+
+        function renderSimulator(tag) {
+            const container = els.simContainer;
+            container.innerHTML = '';
+
+            // --- SERP Simulator ---
+            if (tag.simType === 'serp') {
+                const defaultTitle = tag.name === '<title>' ? "SEO 介紹 - 打造完美的網站標題" : "SEO 介紹 - 網站優化工具";
+                const defaultDesc = tag.name === 'Meta Description' ? "學習如何撰寫完美的 Meta Description。這個即時預覽工具能幫助您提升點擊率，掌握搜尋引擎優化的核心技巧。" : "這是一個範例描述文字，用於展示搜尋結果頁面的顯示效果。";
+
+                container.innerHTML = `
+                    <div class="max-w-3xl mx-auto w-full">
+                        <!-- Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="group">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 group-focus-within:text-primary-600 transition-colors">
+                                    Title Tag <span class="text-slate-300 font-normal ml-1 text-[10px]">(建議 < 60 chars)</span>
+                                </label>
+                                <input type="text" id="sim-input-title" value="${defaultTitle}" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-700 focus:ring-2 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all shadow-sm">
+                            </div>
+                            <div class="group">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 group-focus-within:text-primary-600 transition-colors">
+                                    Meta Description <span class="text-slate-300 font-normal ml-1 text-[10px]">(建議 < 160 chars)</span>
+                                </label>
+                                <input type="text" id="sim-input-desc" value="${defaultDesc}" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-700 focus:ring-2 focus:ring-primary-100 focus:border-primary-500 outline-none transition-all shadow-sm">
+                            </div>
+                        </div>
+                        
+                        <!-- Google Preview Card -->
+                        <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-shadow duration-300 cursor-default">
+                            <div class="font-arial sans-serif">
+                                <!-- Breadcrumb -->
+                                <div class="flex items-center gap-3 text-xs text-slate-700 mb-2">
+                                    <div class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-sm">⚡️</div>
+                                    <div class="flex flex-col leading-tight">
+                                        <span class="text-slate-900 font-semibold">SEO Guide</span>
+                                        <span class="text-slate-500 text-[11px]">https://example.com › tools › guide</span>
+                                    </div>
+                                    <i class="ph-fill ph-dots-three-vertical text-slate-300 ml-auto"></i>
+                                </div>
+                                <!-- Title -->
+                                <h3 id="sim-preview-title" class="text-xl text-[#1a0dab] hover:underline cursor-pointer truncate font-medium mb-1 tracking-tight">
+                                    ${defaultTitle}
+                                </h3>
+                                <!-- Desc -->
+                                <p id="sim-preview-desc" class="text-sm text-[#4d5156] leading-relaxed">
+                                    ${defaultDesc}
+                                </p>
+                            </div>
+                        </div>
+                        <p class="text-center text-xs text-slate-400 mt-4">此預覽僅供參考，實際顯示可能因裝置與 Google 演算法而異。</p>
+                    </div>
+                `;
+
+                // Logic
+                const iTitle = document.getElementById('sim-input-title');
+                const iDesc = document.getElementById('sim-input-desc');
+                const pTitle = document.getElementById('sim-preview-title');
+                const pDesc = document.getElementById('sim-preview-desc');
+
+                const updateSerp = () => {
+                    let t = iTitle.value;
+                    let d = iDesc.value;
+                    if (t.length > 60) t = t.substring(0, 58) + '...';
+                    if (d.length > 160) d = d.substring(0, 158) + '...';
+                    pTitle.innerText = t;
+                    pDesc.innerText = d;
+                };
+                iTitle.addEventListener('input', updateSerp);
+                iDesc.addEventListener('input', updateSerp);
+
+            }
+            // --- Social Simulator ---
+            else if (tag.simType === 'social') {
+                container.innerHTML = `
+                    <div class="max-w-4xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                        <!-- Controls -->
+                        <div class="space-y-5 bg-slate-50 p-5 rounded-xl border border-slate-200/60">
+                            <h4 class="text-sm font-bold text-slate-700 mb-1">設定預覽內容</h4>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1.5">og:image URL</label>
+                                <div class="relative">
+                                    <i class="ph ph-image absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                                    <input type="text" id="sim-input-img" value="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80" class="w-full bg-white border border-slate-200 rounded-lg py-2 pl-9 pr-3 text-xs font-mono text-slate-600 focus:ring-2 focus:ring-primary-100 outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 mb-1.5">og:title</label>
+                                <input type="text" id="sim-input-ogtitle" value="提升 200% 轉換率的設計秘訣" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-800 focus:ring-2 focus:ring-primary-100 outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Card Preview -->
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 text-center">Facebook / LinkedIn Preview</h4>
+                            <div class="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+                                <div class="aspect-[1.91/1] bg-slate-100 relative overflow-hidden">
+                                    <img id="sim-preview-img" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://via.placeholder.com/1200x630?text=Invalid+Image+URL'">
+                                </div>
+                                <div class="p-4 bg-slate-50/50 border-t border-slate-100">
+                                    <div class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-1">EXAMPLE.COM</div>
+                                    <h4 id="sim-preview-ogtitle" class="font-bold text-slate-900 leading-tight text-[15px] mb-1">提升 200% 轉換率的設計秘訣</h4>
+                                    <p class="text-xs text-slate-500 truncate">點擊閱讀更多關於設計系統與轉換率優化的實戰案例...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('sim-input-img').addEventListener('input', (e) => {
+                    document.getElementById('sim-preview-img').src = e.target.value;
+                });
+                document.getElementById('sim-input-ogtitle').addEventListener('input', (e) => {
+                    document.getElementById('sim-preview-ogtitle').innerText = e.target.value;
+                });
+
+            }
+            // --- Link Juice Simulator ---
+            else if (tag.simType === 'link_juice') {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center w-full max-w-2xl mx-auto">
+                        <!-- Toggle -->
+                        <div class="bg-white p-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-3 mb-10">
+                            <span class="text-[11px] font-bold text-slate-400 pl-3 uppercase tracking-wider">Mode:</span>
+                            <button id="toggle-nofollow" class="relative inline-flex h-7 w-12 items-center rounded-full bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                                <span class="sr-only">Toggle</span>
+                                <span id="toggle-thumb" class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform translate-x-1 shadow-sm"></span>
+                            </button>
+                            <span id="status-text" class="text-[10px] font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 uppercase tracking-wide min-w-[80px] text-center transition-colors">Dofollow</span>
+                        </div>
+
+                        <!-- Viz -->
+                        <div class="relative w-full flex items-center justify-between px-4 md:px-12">
+                            <!-- Node A -->
+                            <div class="w-24 h-24 rounded-2xl bg-white border-2 border-primary-500 shadow-glow flex flex-col items-center justify-center z-10 relative">
+                                <div class="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center mb-2">
+                                    <i class="ph-duotone ph-file-text text-xl text-primary-600"></i>
+                                </div>
+                                <span class="text-xs font-bold text-slate-700">Page A</span>
+                                <span class="text-[10px] text-slate-400">Source</span>
+                            </div>
+                            
+                            <!-- Pipe -->
+                            <div class="flex-1 h-3 bg-slate-100 mx-[-10px] relative overflow-hidden rounded-full ring-1 ring-slate-200 z-0">
+                                <svg width="100%" height="100%" class="absolute inset-0">
+                                    <line id="flow-line" x1="0" y1="50%" x2="100%" y2="50%" stroke="#3B82F6" stroke-width="3" class="juice-flow" />
+                                </svg>
+                                <div id="block-icon" class="hidden absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full p-1.5 shadow-md border border-red-100 z-20">
+                                    <i class="ph-fill ph-prohibit text-xl text-red-500"></i>
+                                </div>
+                            </div>
+
+                            <!-- Node B -->
+                            <div class="w-24 h-24 rounded-2xl bg-slate-50 border-2 border-slate-200 shadow-sm flex flex-col items-center justify-center z-10">
+                                <div class="w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center mb-2">
+                                    <i class="ph-duotone ph-globe text-xl text-slate-400"></i>
+                                </div>
+                                <span class="text-xs font-bold text-slate-500">Page B</span>
+                                <span class="text-[10px] text-slate-400">Target</span>
+                            </div>
+                        </div>
+                        
+                        <p id="sim-explainer" class="text-sm text-slate-500 mt-10 text-center max-w-md bg-white px-6 py-3 rounded-xl border border-slate-100 shadow-soft">
+                            <i class="ph-fill ph-check-circle text-emerald-500 mr-1"></i>
+                            權重 (Link Juice) 正在傳遞，有助於目標頁面排名。
+                        </p>
+                    </div>
+                `;
+
+                // Logic
+                const btn = document.getElementById('toggle-nofollow');
+                const thumb = document.getElementById('toggle-thumb');
+                const status = document.getElementById('status-text');
+                const flowLine = document.getElementById('flow-line');
+                const blockIcon = document.getElementById('block-icon');
+                const explainer = document.getElementById('sim-explainer');
+                let isNofollow = false;
+
+                btn.addEventListener('click', () => {
+                    isNofollow = !isNofollow;
+                    if (isNofollow) {
+                        btn.classList.replace('bg-slate-200', 'bg-red-500');
+                        thumb.classList.replace('translate-x-1', 'translate-x-6');
+                        status.innerText = "Nofollow";
+                        status.className = "text-[10px] font-bold px-3 py-1 rounded-full bg-red-100 text-red-700 uppercase tracking-wide min-w-[80px] text-center transition-colors";
+
+                        flowLine.classList.replace('juice-flow', 'juice-blocked');
+                        flowLine.setAttribute('stroke', '#CBD5E1');
+                        blockIcon.classList.remove('hidden');
+                        explainer.innerHTML = `<i class="ph-fill ph-x-circle text-red-500 mr-1"></i> 屬性已設置 <code>rel="nofollow"</code>。權重傳遞被阻擋。`;
+                    } else {
+                        btn.classList.replace('bg-red-500', 'bg-slate-200');
+                        thumb.classList.replace('translate-x-6', 'translate-x-1');
+                        status.innerText = "Dofollow";
+                        status.className = "text-[10px] font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 uppercase tracking-wide min-w-[80px] text-center transition-colors";
+
+                        flowLine.classList.replace('juice-blocked', 'juice-flow');
+                        flowLine.setAttribute('stroke', '#3B82F6');
+                        blockIcon.classList.add('hidden');
+                        explainer.innerHTML = `<i class="ph-fill ph-check-circle text-emerald-500 mr-1"></i> 權重 (Link Juice) 正在傳遞，有助於目標頁面排名。`;
+                    }
+                });
+
+            } else {
+                // Static: 此處代碼雖然保留，但因為上層邏輯已隱藏 section，所以不會顯示。
+                // 這是為了保持結構完整性。
+                container.innerHTML = ``;
+            }
+        }
+
+        // --- 4. Interactions ---
+        function setCategory(id) {
+            if (state.activeCategory !== id) {
+                state.activeCategory = id;
+                state.activeTagIndex = 0;
+                renderNavigation();
+                renderMainContent();
+            }
+        }
+
+        function setTag(index) {
+            state.activeTagIndex = index;
+            renderNavigation();
+            renderMainContent();
+            if (window.innerWidth < 768) closeSidebar();
+        }
+
+        function setupEventListeners() {
+            els.mobileMenuBtn.addEventListener('click', () => els.sidebar.classList.remove('-translate-x-full'));
+            els.sidebarClose.addEventListener('click', closeSidebar);
+        }
+
+        function closeSidebar() {
+            els.sidebar.classList.add('-translate-x-full');
+        }
+
+        function copyCode() {
+            navigator.clipboard.writeText(els.codePreview.innerText).then(() => alert('HTML 代碼已複製！'));
+        }
+
+        // Run
+        init();
+
+    </script>
+</body>
+
+</html>

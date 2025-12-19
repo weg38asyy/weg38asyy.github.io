@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>考拉茶棧</title>
+  <icon>https://fly-koala.com/icon.png</icon>
+  <subtitle>客倌，今天想喝什麼呢？</subtitle>
+  <link href="https://fly-koala.com/atom.xml" rel="self"/>
+  
+  <link href="https://fly-koala.com/"/>
+  <updated>2025-12-19T00:24:46.322Z</updated>
+  <id>https://fly-koala.com/</id>
+  
+  <author>
+    <name>飛考拉</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2025 Martech 行銷科技高峰會不得不知的重點！（參加心得）</title>
+    <link href="https://fly-koala.com/posts/2025-martech-summit/"/>
+    <id>https://fly-koala.com/posts/2025-martech-summit/</id>
+    <published>2025-12-16T18:00:00.000Z</published>
+    <updated>2025-12-19T00:24:46.322Z</updated>
+    
+    
+    <summary type="html">從宏觀到微觀，打造現代 Martech 知識體系。涵蓋行銷科技趨勢、核心原則、AI 驅動引擎、LINE 閉環生態圈、The North Face 大師級案例，以及 AI Agents 未來展望。</summary>
+    
+    
+    
+    <category term="講座" scheme="https://fly-koala.com/categories/%E8%AC%9B%E5%BA%A7/"/>
+    
+    
+    <category term="AI" scheme="https://fly-koala.com/tags/AI/"/>
+    
+    <category term="Martech" scheme="https://fly-koala.com/tags/Martech/"/>
+    
+    <category term="數據驅動" scheme="https://fly-koala.com/tags/%E6%95%B8%E6%93%9A%E9%A9%85%E5%8B%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>當檔案上傳遇上高併發：三個問題與解決方案</title>
+    <link href="https://fly-koala.com/posts/8f3e2a1b/"/>
+    <id>https://fly-koala.com/posts/8f3e2a1b/</id>
+    <published>2025-12-07T20:20:00.000Z</published>
+    <updated>2025-12-19T00:24:46.322Z</updated>
+    
+    
+    <summary type="html">從一個實際的檔案上傳問題出發，探討 Memory 溢出、網路緩慢、高併發三大難題的解決思路，適合 Junior RD 閱讀。</summary>
+    
+    
+    
+    <category term="系統架構" scheme="https://fly-koala.com/categories/%E7%B3%BB%E7%B5%B1%E6%9E%B6%E6%A7%8B/"/>
+    
+    
+    <category term="上傳" scheme="https://fly-koala.com/tags/%E4%B8%8A%E5%82%B3/"/>
+    
+    <category term="PHP" scheme="https://fly-koala.com/tags/PHP/"/>
+    
+    <category term="架構設計" scheme="https://fly-koala.com/tags/%E6%9E%B6%E6%A7%8B%E8%A8%AD%E8%A8%88/"/>
+    
+    <category term="AWS" scheme="https://fly-koala.com/tags/AWS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>提升網站排名必備神器：SEO Top 10</title>
+    <link href="https://fly-koala.com/posts/f744987/"/>
+    <id>https://fly-koala.com/posts/f744987/</id>
+    <published>2025-11-30T09:02:05.000Z</published>
+    <updated>2025-12-19T00:24:46.321Z</updated>
+    
+    
+    <summary type="html">整理 SEO 最常用的 Top 10 標籤與技巧，包含 meta、Open Graph、結構化資料等，並標註 Google 官方文件出處，讓你快速掌握網站優化關鍵！</summary>
+    
+    
+    
+    <category term="5分鐘開箱即用" scheme="https://fly-koala.com/categories/5%E5%88%86%E9%90%98%E9%96%8B%E7%AE%B1%E5%8D%B3%E7%94%A8/"/>
+    
+    
+    <category term="SEO" scheme="https://fly-koala.com/tags/SEO/"/>
+    
+    <category term="網站優化" scheme="https://fly-koala.com/tags/%E7%B6%B2%E7%AB%99%E5%84%AA%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI：SDD下的利器 Spec Kit 真的好用嗎？</title>
+    <link href="https://fly-koala.com/posts/a1b2c3d4/"/>
+    <id>https://fly-koala.com/posts/a1b2c3d4/</id>
+    <published>2025-11-27T18:01:05.000Z</published>
+    <updated>2025-12-19T00:24:46.321Z</updated>
+    
+    
+    <summary type="html">深入探討 Spec Kit 這款 SDD（Specification-Driven Development）工具的實際使用體驗，分析其優缺點與最佳實踐建議。</summary>
+    
+    
+    
+    <category term="AI工具" scheme="https://fly-koala.com/categories/AI%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="AI" scheme="https://fly-koala.com/tags/AI/"/>
+    
+    <category term="SDD" scheme="https://fly-koala.com/tags/SDD/"/>
+    
+    <category term="Spec Kit" scheme="https://fly-koala.com/tags/Spec-Kit/"/>
+    
+    <category term="開發工具" scheme="https://fly-koala.com/tags/%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>學習的體系與架構一圖流</title>
+    <link href="https://fly-koala.com/posts/8a9cdeef/"/>
+    <id>https://fly-koala.com/posts/8a9cdeef/</id>
+    <published>2025-11-23T19:01:05.000Z</published>
+    <updated>2025-12-19T00:24:46.321Z</updated>
+    
+    
+    <summary type="html">總結多門高效學習課程與經典書籍，提煉出一套通用的學習體系與架構，無論學什麼都能快速上手，讓你成為真正的學習高手！</summary>
+    
+    
+    
+    <category term="學習" scheme="https://fly-koala.com/categories/%E5%AD%B8%E7%BF%92/"/>
+    
+    
+    <category term="學習" scheme="https://fly-koala.com/tags/%E5%AD%B8%E7%BF%92/"/>
+    
+    <category term="學習技巧" scheme="https://fly-koala.com/tags/%E5%AD%B8%E7%BF%92%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo最速CICD部署，GitHub Actions！</title>
+    <link href="https://fly-koala.com/posts/9txgh5a2/"/>
+    <id>https://fly-koala.com/posts/9txgh5a2/</id>
+    <published>2025-11-23T08:20:42.000Z</published>
+    <updated>2025-12-19T00:24:46.322Z</updated>
+    
+    
+    <summary type="html">提供Hexo使用Github Actions進行CI/CD自動化部署的完全教程！</summary>
+    
+    
+    
+    <category term="最速攻略" scheme="https://fly-koala.com/categories/%E6%9C%80%E9%80%9F%E6%94%BB%E7%95%A5/"/>
+    
+    
+    <category term="自動化" scheme="https://fly-koala.com/tags/%E8%87%AA%E5%8B%95%E5%8C%96/"/>
+    
+    <category term="Hexo" scheme="https://fly-koala.com/tags/Hexo/"/>
+    
+    <category term="CICD" scheme="https://fly-koala.com/tags/CICD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>商業思維學院每日自動登入打卡！再也不用忘記簽到啦！</title>
+    <link href="https://fly-koala.com/posts/b5dsga5t/"/>
+    <id>https://fly-koala.com/posts/b5dsga5t/</id>
+    <published>2022-03-24T08:20:14.000Z</published>
+    <updated>2025-12-19T00:24:46.321Z</updated>
+    
+    
+    <summary type="html">每天自動登入商業思維學院，輕鬆賺商值！</summary>
+    
+    
+    
+    <category term="5分鐘開箱即用" scheme="https://fly-koala.com/categories/5%E5%88%86%E9%90%98%E9%96%8B%E7%AE%B1%E5%8D%B3%E7%94%A8/"/>
+    
+    
+    <category term="自動化" scheme="https://fly-koala.com/tags/%E8%87%AA%E5%8B%95%E5%8C%96/"/>
+    
+    <category term="Python" scheme="https://fly-koala.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大檔案上傳時斷線怎麼辦？斷點續傳快速實戰！</title>
+    <link href="https://fly-koala.com/posts/3bd9f9a3/"/>
+    <id>https://fly-koala.com/posts/3bd9f9a3/</id>
+    <published>2022-03-16T18:20:42.000Z</published>
+    <updated>2025-12-19T00:24:46.321Z</updated>
+    
+    
+    <summary type="html">大檔案上傳時，一旦遇到網路不穩或斷線，就會導致檔案需要全部重新上傳，本文講解斷點續傳如何實作。</summary>
+    
+    
+    
+    <category term="5分鐘開箱即用" scheme="https://fly-koala.com/categories/5%E5%88%86%E9%90%98%E9%96%8B%E7%AE%B1%E5%8D%B3%E7%94%A8/"/>
+    
+    
+    <category term="Laravel" scheme="https://fly-koala.com/tags/Laravel/"/>
+    
+    <category term="Vue" scheme="https://fly-koala.com/tags/Vue/"/>
+    
+    <category term="上傳" scheme="https://fly-koala.com/tags/%E4%B8%8A%E5%82%B3/"/>
+    
+  </entry>
+  
+</feed>
