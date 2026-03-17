@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spec-Kit Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-8px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .animate-in { animation: slideInFromLeft 0.3s ease-out; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // --- Simple Icon Components (替代 lucide-react) ---
+        const Icon = ({ children, size = 16, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                {children}
+            </svg>
+        );
+
+        const TerminalIcon = (props) => <Icon {...props}><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></Icon>;
+        const FileText = (props) => <Icon {...props}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></Icon>;
+        const ShieldCheck = (props) => <Icon {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></Icon>;
+        const Cpu = (props) => <Icon {...props}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></Icon>;
+        const ArrowRight = (props) => <Icon {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></Icon>;
+        const CheckCircle = (props) => <Icon {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></Icon>;
+        const GitBranch = (props) => <Icon {...props}><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></Icon>;
+        const Code = (props) => <Icon {...props}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></Icon>;
+        const Folder = (props) => <Icon {...props}><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></Icon>;
+        const FolderOpen = (props) => <Icon {...props}><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><path d="M2 10h20"/></Icon>;
+        const ChevronDown = (props) => <Icon {...props}><polyline points="6 9 12 15 18 9"/></Icon>;
+        const Scale = (props) => <Icon {...props}><line x1="12" y1="3" x2="12" y2="21"/><polyline points="4 8 12 3 20 8"/><path d="M4 8l0 4a4 4 0 0 0 8 0l0-4"/><path d="M12 8l0 4a4 4 0 0 0 8 0l0-4"/></Icon>;
+        const ListTodo = (props) => <Icon {...props}><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></Icon>;
+        const Eye = (props) => <Icon {...props}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></Icon>;
+
+        // --- File Content Templates (Mock Data) ---
+        const fileContents = {
+            'constitution.md': `# 專案憲章 (Project Constitution)
+版本: 1.0 | 生效日期: 2025-11-27
+
+## 第一條：核心原則 (Core Principles)
+1. **保持簡單 (Simplicity)**:
+   - 避免過度設計。若有兩種方案，選擇相依性較少的那一個。
+   - 任何引入的第三方庫必須經過團隊審核。
+2. **測試驅動 (Test-First)**:
+   - 在撰寫任何實作程式碼前，必須先完成 API 合約與測試案例。
+
+## 第二條：技術堆疊 (Tech Stack)
+- **Runtime**: Node.js (LTS)
+- **Language**: TypeScript (Strict Mode)
+- **Frontend**: React + Tailwind CSS
+- **Database**: PostgreSQL (Prisma ORM)
+- **Real-time**: Socket.io
+
+## 第三條：編碼規範
+- 所有非同步操作必須使用 async/await。
+- 嚴格禁止使用 any 類型，必須定義明確 Interface。`,
+
+            'spec.md': `# 功能規格書：即時聊天系統
+分支: 003-chat-system | 狀態: Draft | 優先級: High
+
+## 1. 概述 (Overview)
+建立一個支援即時訊息傳遞的 WebSocket 服務，允許使用者進入聊天室並傳送文字訊息。此功能旨在提升平台使用者的黏著度。
+
+## 2. 使用者故事 (User Stories)
+- **US-001**: 作為一名使用者，我希望輸入暱稱後能進入大廳，以便開始對話。
+- **US-002**: 作為一名使用者，我希望能即時看到其他人的訊息，無需重新整理頁面。
+- **US-003**: [NEEDS CLARIFICATION] 訊息是否需要持久化儲存？
+  - *目前的假設*: 是，需儲存最近 50 筆歷史訊息供新加入者查看。
+
+## 3. 驗收標準 (Acceptance Criteria)
+- 訊息傳遞延遲低於 100ms。
+- 斷線後能自動嘗試重連 (Retry Strategy)。
+- 支援至少 100 人同時在線的壓力測試。`,
+
+            'plan.md': `# 實施計畫：即時聊天系統核心
+分支: 003-chat-system | 日期: 2025-11-27 | 規格: spec.md
+輸入: 來自 /specs/003-chat-system/spec.md 的功能規格
+注意: 此模板由 /speckit.plan 命令填寫。
+
+## 總結
+本計畫旨在實現高併發的即時聊天服務。核心功能圍繞 WebSocket 事件驅動架構。技術上將採用 Socket.io 處理長連線，並利用 Redis Pub/Sub (預留) 支援未來的橫向擴展。
+
+## 實作路徑 (Implementation Path)
+1. **資料層**: 設計 Message 與 User Schema (PostgreSQL)。
+2. **傳輸層**: 定義 WebSocket Events (join, message, leave)。
+3. **服務層**: 實作廣播邏輯與歷史訊息快取。
+
+## 架構決策 (Architecture Decision)
+- **為何選擇 Socket.io?**:
+  - 內建斷線重連與 Room 機制。
+  - 符合憲章 Article VII "保持簡單" 原則 (避免自行實作 Heartbeat)。
+
+## 附屬文件
+- data-model.md: 資料庫設計圖
+- contracts/: API 介面定義`,
+
+            'tasks.md': `# 任務清單：聊天系統實作
+狀態: Pending | 來源: plan.md
+
+## 初始化 (Init)
+- [ ] [TASK-001] 初始化專案結構與 TypeScript 設定
+- [ ] [TASK-002] 設定 Linter 與 Prettier (依據 Constitution)
+
+## 核心功能 (Core)
+- [ ] [TASK-003] [P] 定義 Prisma Schema (User, Message)
+- [ ] [TASK-004] [P] 撰寫 API 合約 (Events: join, send_msg)
+- [ ] [TASK-005] 實作 Socket.io Server 基礎建設
+- [ ] [TASK-006] 實作「加入聊天室」邏輯 (關聯 US-001)
+- [ ] [TASK-007] 實作「訊息廣播」邏輯 (關聯 US-002)
+
+## 驗證 (Verify)
+- [ ] [TASK-008] 撰寫整合測試 (e2e-chat.test.ts)
+- [ ] [TASK-009] 執行 load test 確保 100+ concurrency`,
+
+            'service.ts': `import { Server, Socket } from 'socket.io';
+import { prisma } from './model';
+
+// Implements Task-005 & Task-007
+export class ChatService {
+    constructor(private io: Server) {}
+
+    public init() {
+        this.io.on('connection', (socket: Socket) => {
+            console.log('User connected:', socket.id);
+
+            // Handle Join
+            socket.on('join', async (room: string) => {
+                await socket.join(room);
+                // ... implementation details
+            });
+
+            // Handle Message
+            socket.on('message', async (data) => {
+                // Validation per contracts
+                if (!data.content) return;
+
+                // Broadcast
+                this.io.to(data.room).emit('message', data);
+            });
+        });
+    }
+}`
+        };
+
+        // --- Steps Data ---
+        const steps = [
+            {
+                id: 'intro',
+                title: 'Spec-Kit 核心哲學',
+                command: 'start_demo',
+                description: 'Spec-Kit 的核心哲學是「以憲章為本，以規格為驅動」。五個嚴謹階段將模糊需求轉化為高品質程式碼。',
+                highlight: '規格即執行 (Specification as Execution)',
+                details: ['建立專案「憲法」', '五大階段流程', '品質閘門機制'],
+                generatedFile: null
+            },
+            {
+                id: 'step1',
+                title: '第一階段：專案憲章',
+                command: '/constitution',
+                description: '定義專案的「法律」與「邊界」。所有後續產出都必須符合此文件。',
+                highlight: '合憲性檢查 (Constitutional Compliance)',
+                details: ['定義 Tech Stack', '建立全域 Context', '不可違反的原則'],
+                qualityCheck: '⚖️ 確立法律與邊界',
+                generatedFile: 'constitution.md'
+            },
+            {
+                id: 'step2',
+                title: '第二階段：需求規格',
+                command: '/specify',
+                args: '即時聊天系統',
+                description: '釐清 WHAT 與 WHY。嚴格禁止涉及 HOW，防止幻覺。',
+                highlight: '防止幻覺與猜測',
+                details: ['自動建立分支', '標記 [NEEDS CLARIFICATION]', '互動迴圈確認'],
+                qualityCheck: '🚫 強制標記模糊需求',
+                generatedFile: 'spec.md'
+            },
+            {
+                id: 'step3',
+                title: '第三階段：實作規劃',
+                command: '/plan',
+                description: '最具智慧的階段。將商業需求轉譯為「合憲」的技術架構。',
+                highlight: '架構閘門 (Architectural Gates)',
+                details: ['測試優先 (Test-First)', '生成資料模型', '檢查過度工程'],
+                qualityCheck: '🛡️ 反抽象閘門',
+                generatedFile: 'plan.md'
+            },
+            {
+                id: 'step4',
+                title: '第四階段：任務拆解',
+                command: '/tasks',
+                description: '將計畫轉換為可執行的「原子化」行動清單。',
+                highlight: '原子化清單 (Atomic Checklist)',
+                details: ['多源分析', '任務衍生', '平行化標記 [P]'],
+                qualityCheck: '⚡ 任務無遺漏',
+                generatedFile: 'tasks.md'
+            },
+            {
+                id: 'step5',
+                title: '第五階段：實作與驗收',
+                command: '/implement',
+                description: 'AI 轉為執行者模式 (Executor Mode)，按表施工。',
+                highlight: '執行者模式 (Executor Mode)',
+                details: ['依據 tasks.md 撰寫', '對應驗收標準', '閉環驗證'],
+                qualityCheck: '✅ 閉環驗證',
+                generatedFile: 'service.ts'
+            }
+        ];
+
+        // --- Components ---
+        const FileNode = ({ name, isNew, type = 'file', depth = 0, isOpen = true, onClick, isActive }) => {
+            const IconComponent = type === 'folder'
+                ? (isOpen ? FolderOpen : Folder)
+                : (name.endsWith('.ts') ? Code : name === 'constitution.md' ? Scale : FileText);
+
+            const colorClass = type === 'folder' ? 'text-yellow-500' : (name === 'constitution.md' ? 'text-purple-400' : 'text-blue-400');
+
+            return (
+                <div
+                    onClick={() => type !== 'folder' && onClick && onClick(name)}
+                    className={`flex items-center gap-2 py-1.5 px-2 rounded text-sm transition-all duration-200 cursor-pointer select-none group
+                        ${isActive ? 'bg-cyan-900/40 text-cyan-200 border-l-2 border-cyan-500' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border-l-2 border-transparent'}
+                        ${isNew ? 'animate-pulse bg-green-900/20' : ''}`}
+                    style={{ paddingLeft: `${depth * 16 + 8}px` }}
+                >
+                    {type === 'folder' && <ChevronDown size={12} className="text-slate-600" />}
+                    {type !== 'folder' && <div className="w-3" />}
+                    <IconComponent size={14} className={colorClass} />
+                    <span className="truncate">{name}</span>
+                    {type !== 'folder' && (
+                        <Eye size={12} className={`ml-auto opacity-0 group-hover:opacity-100 transition-opacity ${isActive ? 'text-cyan-400' : 'text-slate-600'}`} />
+                    )}
+                </div>
+            );
+        };
+
+        const QualityGate = ({ label, active, icon: IconComponent = ShieldCheck }) => (
+            <div className={`flex items-center gap-2 p-2 rounded border transition-all duration-500 ${active
+                ? 'border-cyan-500 bg-cyan-950/50 shadow-[0_0_10px_rgba(6,182,212,0.3)]'
+                : 'border-slate-700 bg-slate-800/50 opacity-50'}`}>
+                <IconComponent size={18} className={active ? 'text-cyan-400' : 'text-slate-500'} />
+                <span className={`text-xs font-bold ${active ? 'text-cyan-100' : 'text-slate-500'}`}>{label}</span>
+            </div>
+        );
+
+        function SpecKitDemo() {
+            const [currentStep, setCurrentStep] = useState(0);
+            const [terminalLogs, setTerminalLogs] = useState([
+                { text: "Welcome to Spec-Kit Environment v2.2", type: "system" },
+                { text: "System ready. Waiting for command...", type: "system" }
+            ]);
+            const [isAnimating, setIsAnimating] = useState(false);
+            const [viewMode, setViewMode] = useState('terminal');
+            const [activeFile, setActiveFile] = useState(null);
+            const scrollRef = useRef(null);
+
+            useEffect(() => {
+                if (scrollRef.current && viewMode === 'terminal') {
+                    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+                }
+            }, [terminalLogs, viewMode]);
+
+            const handleFileClick = (filename) => {
+                if (fileContents[filename]) {
+                    setActiveFile(filename);
+                    setViewMode('editor');
+                }
+            };
+
+            const handleNextStep = () => {
+                if (isAnimating || currentStep >= steps.length - 1) return;
+
+                const nextStepIdx = currentStep + 1;
+                const stepData = steps[nextStepIdx];
+                setIsAnimating(true);
+                setViewMode('terminal');
+
+                setTerminalLogs(prev => [...prev, { text: `> ${stepData.command} ${stepData.args || ''}`, type: "command" }]);
+
+                setTimeout(() => {
+                    setTerminalLogs(prev => [...prev, { text: `Processing ${stepData.command}...`, type: "info" }]);
+
+                    if (nextStepIdx === 1) {
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "📜 Defining project laws & boundaries...", type: "process" }]), 500);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "⚖️ Setting Tech Stack: Node/React/TS", type: "info" }]), 1000);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "📄 Generated: constitution.md", type: "success" }]), 1600);
+                    }
+                    else if (nextStepIdx === 2) {
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "🔍 Analyzing intent: Real-time chat", type: "process" }]), 500);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "🌿 Created branch: 003-chat-system", type: "success" }]), 1000);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "❓ Needs Clarification: Auth Method?", type: "warning" }]), 1500);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "📄 Generated: specs/003-chat/spec.md", type: "success" }]), 2000);
+                    }
+                    else if (nextStepIdx === 3) {
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "📖 Reading spec.md + constitution.md...", type: "process" }]), 500);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "⚖️ Checking Constitutional Compliance...", type: "warning" }]), 1000);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "✅ Anti-Abstraction Gate: PASSED", type: "success" }]), 1600);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "📄 Generated: plan.md, contracts/...", type: "success" }]), 2200);
+                    }
+                    else if (nextStepIdx === 4) {
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "🔗 Analyzing Plan + Data Model...", type: "process" }]), 600);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "⚡ Atomizing tasks...", type: "process" }]), 1200);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "📋 Generated: tasks.md (9 items)", type: "success" }]), 1800);
+                    }
+                    else if (nextStepIdx === 5) {
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "🤖 Executor Mode: ENGAGED", type: "process" }]), 500);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "🔨 Task 003: Prisma Schema (Done)", type: "info" }]), 1200);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "🔨 Task 005: Socket Server (Done)", type: "info" }]), 1800);
+                        setTimeout(() => setTerminalLogs(prev => [...prev, { text: "✅ Verification Passed. Feature Complete.", type: "success" }]), 2500);
+                    }
+
+                    setTimeout(() => {
+                        setCurrentStep(nextStepIdx);
+                        setIsAnimating(false);
+                        if (stepData.generatedFile && fileContents[stepData.generatedFile]) {
+                            setActiveFile(stepData.generatedFile);
+                            setViewMode('editor');
+                        }
+                    }, 2600);
+                }, 500);
+            };
+
+            const handleReset = () => {
+                setCurrentStep(0);
+                setTerminalLogs([{ text: "System reset.", type: "system" }, { text: "Waiting for command...", type: "system" }]);
+                setActiveFile(null);
+                setViewMode('terminal');
+            };
+
+            const step = steps[currentStep];
+
+            return (
+                <div className="h-screen bg-slate-950 text-slate-200 font-sans flex flex-col overflow-hidden">
+                    {/* Header */}
+                    <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md z-50 shrink-0">
+                        <div className="w-full px-4 h-14 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <Cpu className="text-cyan-400" size={20} />
+                                <span className="font-bold text-lg tracking-tight text-white">
+                                    Spec-Kit <span className="text-slate-500 font-normal text-xs ml-1 border border-slate-700 rounded px-1">DEMO ENV</span>
+                                </span>
+                            </div>
+
+                            <div className="hidden lg:flex items-center gap-1">
+                                {steps.map((s, idx) => (
+                                    <div key={idx} className="flex items-center">
+                                        <div className={`w-2 h-2 rounded-full transition-all duration-500 ${idx <= currentStep ? 'bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]' : 'bg-slate-800'}`} />
+                                        {idx < steps.length - 1 && <div className={`w-8 h-[1px] ${idx < currentStep ? 'bg-cyan-900' : 'bg-slate-800'}`} />}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-4 text-sm">
+                                <button onClick={handleReset} className="text-xs text-slate-400 hover:text-cyan-400 transition-colors border border-slate-700 hover:border-cyan-500 px-3 py-1 rounded">
+                                    重置
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* Main Workspace */}
+                    <main className="flex-1 flex overflow-hidden">
+                        {/* COLUMN A: Project Explorer */}
+                        <div className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 transition-all duration-300 z-10">
+                            <div className="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+                                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1">
+                                    <GitBranch size={12} /> Project Explorer
+                                </span>
+                            </div>
+
+                            <div className="flex-1 overflow-y-auto p-2 space-y-1">
+                                <div className="text-[10px] text-slate-600 px-2 py-1 uppercase font-bold">Root</div>
+                                {currentStep >= 1 && (
+                                    <div className="animate-in">
+                                        <FileNode name="constitution.md" isNew={currentStep === 1} onClick={handleFileClick} isActive={activeFile === 'constitution.md'} />
+                                    </div>
+                                )}
+                                <FileNode name="specs/" type="folder" isNew={false} />
+
+                                {currentStep >= 2 && (
+                                    <div className="animate-in">
+                                        <FileNode name="003-chat-system/" type="folder" isNew={currentStep === 2} depth={1} />
+                                        <FileNode name="spec.md" isNew={currentStep === 2} depth={2} onClick={handleFileClick} isActive={activeFile === 'spec.md'} />
+
+                                        {currentStep >= 3 && (
+                                            <React.Fragment>
+                                                <FileNode name="plan.md" isNew={currentStep === 3} depth={2} onClick={handleFileClick} isActive={activeFile === 'plan.md'} />
+                                                <FileNode name="contracts/" type="folder" isNew={currentStep === 3} depth={2} />
+                                            </React.Fragment>
+                                        )}
+
+                                        {currentStep >= 4 && (
+                                            <FileNode name="tasks.md" isNew={currentStep === 4} depth={2} onClick={handleFileClick} isActive={activeFile === 'tasks.md'} />
+                                        )}
+                                    </div>
+                                )}
+
+                                {currentStep >= 5 && (
+                                    <div className="animate-in">
+                                        <FileNode name="src/" type="folder" isNew={false} />
+                                        <FileNode name="chat/" type="folder" isNew={currentStep === 5} depth={1} />
+                                        <FileNode name="service.ts" isNew={currentStep === 5} depth={2} onClick={handleFileClick} isActive={activeFile === 'service.ts'} />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* COLUMN B: Center Panel */}
+                        <div className="flex-1 flex flex-col min-w-0 bg-slate-950 relative">
+                            {/* Tabs Header */}
+                            <div className="flex items-center bg-slate-900 border-b border-slate-800 px-2 pt-2 gap-1">
+                                <button
+                                    onClick={() => setViewMode('terminal')}
+                                    className={`px-4 py-2 text-xs font-mono rounded-t-md border-t border-x flex items-center gap-2 transition-colors ${viewMode === 'terminal'
+                                        ? 'bg-slate-950 text-cyan-400 border-slate-800 border-b-slate-950'
+                                        : 'bg-slate-900 text-slate-500 border-transparent hover:bg-slate-800 hover:text-slate-300'}`}
+                                >
+                                    <TerminalIcon size={12} /> speckit-cli
+                                </button>
+
+                                {activeFile && (
+                                    <button
+                                        onClick={() => setViewMode('editor')}
+                                        className={`px-4 py-2 text-xs font-mono rounded-t-md border-t border-x flex items-center gap-2 transition-colors max-w-[200px] ${viewMode === 'editor'
+                                            ? 'bg-slate-950 text-yellow-400 border-slate-800 border-b-slate-950'
+                                            : 'bg-slate-900 text-slate-500 border-transparent hover:bg-slate-800 hover:text-slate-300'}`}
+                                    >
+                                        <FileText size={12} /> {activeFile}
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Tab Content: Terminal */}
+                            <div
+                                className={`flex-1 p-4 font-mono text-sm overflow-y-auto space-y-2 scroll-smooth pb-20 ${viewMode === 'terminal' ? 'block' : 'hidden'}`}
+                                ref={scrollRef}
+                            >
+                                {terminalLogs.map((log, i) => (
+                                    <div
+                                        key={i}
+                                        className={`break-words leading-relaxed
+                                            ${log.type === 'command' ? 'text-cyan-300 font-bold mt-6 mb-2 border-l-2 border-cyan-700 pl-3' : ''}
+                                            ${log.type === 'system' ? 'text-slate-500 italic' : ''}
+                                            ${log.type === 'info' ? 'text-slate-300' : ''}
+                                            ${log.type === 'process' ? 'text-blue-400' : ''}
+                                            ${log.type === 'warning' ? 'text-yellow-400' : ''}
+                                            ${log.type === 'success' ? 'text-green-400' : ''}`}
+                                    >
+                                        {log.text}
+                                    </div>
+                                ))}
+                                {isAnimating && <div className="animate-pulse text-cyan-500 mt-2">▋</div>}
+
+                                <div className="h-24"></div>
+                                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex justify-center pointer-events-none w-full px-6">
+                                    {currentStep < steps.length - 1 && !isAnimating && (
+                                        <button
+                                            onClick={handleNextStep}
+                                            className="pointer-events-auto bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-8 rounded-full shadow-[0_10px_30px_-10px_rgba(8,145,178,0.5)] flex items-center gap-3 transition-all transform hover:scale-105 active:scale-95 border border-cyan-400/30 group backdrop-blur-sm"
+                                        >
+                                            <TerminalIcon size={16} className="group-hover:rotate-12 transition-transform" />
+                                            <span>執行: {steps[currentStep + 1].command}</span>
+                                            <ArrowRight size={18} className="opacity-70 group-hover:translate-x-1 transition-transform" />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Tab Content: Editor */}
+                            <div className={`flex-1 flex flex-col bg-[#1e1e1e] ${viewMode === 'editor' ? 'block' : 'hidden'}`}>
+                                <div className="flex-1 p-6 overflow-y-auto font-mono text-sm leading-relaxed text-slate-300">
+                                    {activeFile ? (
+                                        <div className="whitespace-pre-wrap max-w-3xl">
+                                            {fileContents[activeFile] || <span className="text-slate-600 italic">// Binary or empty file</span>}
+                                        </div>
+                                    ) : (
+                                        <div className="h-full flex flex-col items-center justify-center text-slate-600">
+                                            <FileText size={48} className="mb-4 opacity-20" />
+                                            <p>Select a file from the explorer to preview</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="bg-cyan-950/20 border-t border-slate-800 p-2 flex justify-between text-[10px] text-slate-500 px-4">
+                                    <span>UTF-8</span>
+                                    <span>Markdown / TypeScript</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* COLUMN C: Guide & Theory */}
+                        <div className="w-[30%] min-w-[320px] bg-slate-900 border-l border-slate-800 flex flex-col shrink-0">
+                            <div className="p-6 overflow-y-auto flex-1">
+                                <div className="mb-6">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-cyan-500 text-xs font-bold uppercase tracking-widest border border-cyan-900 bg-cyan-950/30 px-2 py-0.5 rounded">
+                                            Phase {currentStep} / {steps.length - 1}
+                                        </span>
+                                    </div>
+                                    <h2 className="text-2xl font-bold text-white mb-2 leading-tight">{step.title}</h2>
+                                    <div className="h-1 w-12 bg-cyan-500 rounded mb-4"></div>
+                                    <p className="text-slate-300 leading-relaxed text-sm mb-4">
+                                        {step.description}
+                                    </p>
+                                    <div className="bg-slate-800/50 p-3 rounded-md border-l-2 border-cyan-500">
+                                        <p className="text-cyan-400 text-xs font-mono font-bold">核心重點：</p>
+                                        <p className="text-cyan-100 text-sm font-medium mt-1">{step.highlight}</p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4 mb-8">
+                                    {step.details.map((detail, idx) => (
+                                        <div key={idx} className="flex gap-3 text-slate-400 text-sm group">
+                                            <div className="mt-1 shrink-0">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-cyan-400 transition-colors"></div>
+                                            </div>
+                                            <span className="group-hover:text-slate-200 transition-colors">{detail}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {(currentStep >= 1 && currentStep <= 5) && (
+                                    <div className="bg-slate-800 rounded-lg p-4 border border-slate-700/50">
+                                        <h4 className="text-xs uppercase text-slate-500 font-bold tracking-wider mb-3 flex items-center gap-2">
+                                            <ShieldCheck size={14} /> Quality Gates
+                                        </h4>
+                                        <div className="space-y-2">
+                                            <QualityGate label="Constitutional Check" active={currentStep >= 1} icon={Scale} />
+                                            <QualityGate label="No Hallucinations" active={currentStep >= 2} />
+                                            <QualityGate label="Architectural Gates" active={currentStep >= 3} />
+                                            <QualityGate label="Atomic Tasks" active={currentStep >= 4} icon={ListTodo} />
+                                            <QualityGate label="Closed-Loop Verify" active={currentStep >= 5} icon={CheckCircle} />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="p-4 border-t border-slate-800 bg-slate-900 text-center">
+                                <p className="text-slate-600 text-xs">Spec-Kit Methodology v2.2</p>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SpecKitDemo />);
+    </script>
+</body>
+</html>
